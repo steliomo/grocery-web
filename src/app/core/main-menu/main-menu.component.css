@@ -1,0 +1,12 @@
+.main-menu{
+    margin-top: 20px;
+}
+
+.menu-item li{ 
+    background-color: #0d47a1;
+    color: #fff;
+    margin-left: 4px;
+    padding: 8px;
+    border-radius: 5% 5% 0% 0%;
+    cursor: pointer;
+}

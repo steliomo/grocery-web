@@ -1,0 +1,22 @@
+.header {
+    background-color: #263238;
+    color: #fff;
+    height: 55px;
+}
+
+.brand {
+    border-radius: 100%;
+    background-color: #c62828;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: #263238;
+    font-size: 1.3em;
+    font-family: "Shadows Into Light", cursive;
+    text-shadow: 2px 2px #000;
+}
+
+.navbar-brand{
+    margin-right: .2rem;
+}
