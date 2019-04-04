@@ -1,0 +1,70 @@
+<div class="card">
+    
+    <div class="card-header bg-default ">
+        <div class="d-flex">
+            
+            <div class="mr-auto p-2 btn btn-default">
+                <span class="fa fa-inbox"></span><strong> Detalhes do Produto </strong>
+            </div>
+
+            <div class="p-1">
+                <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/products']"> Listar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <form [formGroup]="productForm" (submit)="saveProduct()">
+
+        <div class="container">
+            <go-alert></go-alert>
+        </div>
+    
+        <div class="card-body">
+        
+                <div class="form-group row">
+                    <label for="product" class="col-form-label col-md-2 text-right font-weight-bold">Producto:</label>
+                    <div class="col-md-6 mb-3">    
+                        <select formControlName="product" class="form-control" id="product">
+                            <option selected disabled >Seleccione</option>
+                            <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+                        </select>
+                    </div>
+                    <div class="p-1"><a class="btn btn-success fa fa-plus-square" [routerLink]="['/products/product-form']"></a></div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
+                    <div class="col-md-6 mb-3">    
+                        <input formControlName="productDescription" type="text" class="form-control" id="description">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="productSize" class="col-form-label col-md-2 text-right font-weight-bold">Tamanho:</label>
+                    <div class="col-md-6 mb-3">    
+                        <select formControlName="productSize" class="form-control" id="productSize">
+                            <option value="">Seleccione</option>
+                            <option *ngFor="let productSize of productSizes">{{productSize}}</option>
+                        </select>
+                    </div>
+
+                    <div class="p-1">
+                        <button class="btn btn-success fa fa-plus-square"></button>
+                    </div>
+                </div>
+                
+        </div>
+
+        <div class="card-footer d-flex">
+            <div class="p-1">
+                <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+            </div>
+            <div class="p-1">
+                <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
