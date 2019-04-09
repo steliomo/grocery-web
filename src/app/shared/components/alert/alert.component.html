@@ -1,4 +1,4 @@
-<div *ngFor="let alert of alerts" class="text-center mt-3 alert-link {{getAlertType(alert)}}" role="alert">
+<div *ngFor="let alert of alerts" class="text-center mt-3 {{getAlertType(alert)}}" role="alert">
     {{alert.message}}
     <button type="button" class="close">
             <span aria-hidden="true" class="fa {{ icon }}"></span>

@@ -3,10 +3,11 @@ import { Routes, RouterModule}  from '@angular/router';
 
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ProductFormComponent } from './products/product/product-form/product-form.component';
-import { ProductFormResolver } from './products/product/product-form/product-form.resolver';
 import { ProductListComponent } from './products/product/product-list/product-list.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDescriptionFormComponent } from './products/product-description/product-description-form/product-description-form.component';
+import { ProductResolver } from './products/product-description/product.resolver';
+import { ProductDescriptionListComponent } from './products/product-description/product-description-list/product-description-list.component';
 
 const routes: Routes  = [
     {
@@ -17,19 +18,28 @@ const routes: Routes  = [
             {
                 path: 'product-form',
                 component: ProductFormComponent,
-                resolve: {
-                    products: ProductFormResolver
-                }
+                
             },
 
             {
                 path: '',
-                component: ProductListComponent
+                component: ProductDescriptionListComponent
             },
 
             {
                 path: 'product-description',
-                component: ProductDescriptionFormComponent
+                component: ProductDescriptionFormComponent,
+                resolve: {
+                    products: ProductResolver
+                }
+            },
+
+            {
+                path: 'product-list',
+                component: ProductListComponent,
+                resolve: {
+                    products: ProductResolver
+                }
             }
         ]
     },

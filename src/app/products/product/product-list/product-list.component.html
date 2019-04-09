@@ -4,17 +4,18 @@
         <div class="d-flex">
             
             <div class="mr-auto p-2 btn btn-default">
-                <span class="fa fa-inbox"></span><strong> Detalhes do Produto </strong>
+                <span class="fa fa-inbox"></span><strong> Produto </strong>
             </div>
 
             <div class="p-1">
-                <button class="btn btn-success font-weight-bold fa fa-shopping-cart" [routerLink]="['/products/product-description']"> Adicionar</button>
+                <button class="btn btn-success font-weight-bold fa fa-shopping-cart" [routerLink]="['/products/product-form']"> Adicionar</button>
             </div>
 
         </div>
     </div>
 
     <div class="card-body">
+
         <form class="mb-3">
             <div class="form-group row">
                 <div class="col-md-6 mb-3">    
@@ -24,34 +25,42 @@
         </form>
 
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Tamanho</th>
+                <th>Nome do producto</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+              <tr *ngFor="let product of products">
+                <td>{{product.name}}</td>
+                <td>
+                  <div class="text-right">
+                      <button class="btn btn-success mr-1 fa fa-edit"></button>
+                      <button class="btn btn-danger fa fa-trash"></button>
+                  </div>
+                </td>
               </tr>
             </tbody>
-          </table>
+        </table>
+
+        <nav>
+            <ul class="pagination justify-content-end">
+              
+              <li class="page-item">
+                <a class="page-link" (click)="setPage(currentPage - 1)"> 
+                  <span class="fa fa-arrow-circle-left"></span>
+                </a>
+              </li>
+
+              <li *ngFor="let page of pages" class="page-item" [ngClass]="{active:currentPage === page}" ><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+              
+              <li class="page-item">
+                <a class="page-link" (click)="setPage(currentPage + 1)">
+                  <span class="fa fa-arrow-circle-right"></span>
+                </a>
+              </li>
+
+            </ul>
+        </nav>
     </div>
 </div>

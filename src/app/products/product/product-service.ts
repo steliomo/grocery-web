@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from './product';
+import { environment } from 'src/environments/environment';
 
-const API_URL = 'http://localhost:8082/services';
+
 
 @Injectable({providedIn: 'root'})
 export class ProductService{
@@ -11,6 +12,10 @@ export class ProductService{
     }
     
     findAllProducts(){
-       return this.http.get<Product[]>(API_URL +'/products');
+       return this.http.get<Product[]>(environment.API_URL +'/products');
+    }
+
+    createteProduct(product: Product){
+       return this.http.post<Product>(environment.API_URL+'/products', product);
     }
 }

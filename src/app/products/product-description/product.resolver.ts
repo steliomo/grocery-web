@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../product/product';
 import { Observable } from 'rxjs';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { ProductService } from '../product-service';
+import { ProductService } from '../product/product-service';
 
 @Injectable({providedIn: 'root'})
-export class ProductFormResolver implements Resolve<Observable<Product[]>>{
+export class ProductResolver implements Resolve<Observable<Product[]>>{
 
     constructor(private productService: ProductService){
     }

@@ -6,6 +6,7 @@ import { ProductsComponent } from './products.component';
 import { ProductModule } from './product/product.module';
 import { CoreModule } from '../core/core.module';
 import { ProductDescriptionModule } from './product-description/product-description.module';
+import { AlertModule } from '../shared/components/alert/alert.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { ProductDescriptionModule } from './product-description/product-descript
         ProductModule,
         CoreModule,
         RouterModule,
-        ProductDescriptionModule
+        ProductDescriptionModule,
+        AlertModule
     ]
 })
 export class ProductsModule{

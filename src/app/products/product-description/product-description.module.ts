@@ -7,9 +7,13 @@ import { ProductDescriptionFormComponent } from './product-description-form/prod
 import { AlertModule } from 'src/app/shared/components/alert/alert.module';
 import { Product } from '../product/product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { ProductDescriptionListComponent } from './product-description-list/product-description-list.component';
 
 @NgModule({
-    declarations: [ ProductDescriptionFormComponent ],
+    declarations: [ 
+        ProductDescriptionFormComponent,
+        ProductDescriptionListComponent
+    ],
 
     imports: [
         CommonModule,

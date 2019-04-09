@@ -33,4 +33,8 @@ export class AlertService {
     getAlert(){
         return this.alertSubject.asObservable();
     }
+
+    destroy(){
+        this.alertSubject.unsubscribe();
+    }
 }
