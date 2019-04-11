@@ -18,4 +18,8 @@ export class ProductService{
     createteProduct(product: Product){
        return this.http.post<Product>(environment.API_URL+'/products', product);
     }
+
+    findProductsByName(name: string){
+       return this.http.get<Product[]>(environment.API_URL+'/products/'+name);
+    }
 }

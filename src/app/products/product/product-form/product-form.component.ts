@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductService } from '../product-service';
+import { ProductNameValidatorService } from '../product-name-validator-service';
 
 @Component({
     selector: 'go-product-form',
@@ -20,12 +21,14 @@ export class ProductFormComponent implements OnInit{
         private formBuilder: FormBuilder, 
         private alertService: AlertService, 
         private productService: ProductService,
-        private router: Router) {}
+        private router: Router, 
+        private productNameValidatorService: ProductNameValidatorService) {}
         
         ngOnInit() { 
             this.products = this.activeRoute.snapshot.data.products;
             this.productForm = this.formBuilder.group({
-                name: ['', [Validators.required, Validators.minLength(3)] ]
+                name: ['', [Validators.required, Validators.minLength(3)], 
+                this.productNameValidatorService.validateProductName() ]
             });
         }
         
@@ -37,7 +40,6 @@ export class ProductFormComponent implements OnInit{
                 .subscribe(productCreated => {
                     this.alertService.success('O producto '+productCreated.name+' foi criado com sucesso.');
                     this.router.navigate(['/products/product-list']);
-                    this.productForm.reset();
                 }, error => {
                     console.log(error);
                     this.alertService.danger('Erro ao criar o produto!');

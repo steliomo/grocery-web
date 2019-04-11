@@ -24,6 +24,7 @@
                     <input formControlName="name" type="text" class="form-control" id="description" autocomplete="off">
                     <go-input-message message="*Campo obrigatório!" *ngIf="productForm.get('name').errors?.required && (form.submitted || productForm.get('name').touched)"></go-input-message>
                     <go-input-message message="* O nome deve ter no mínimo 3 caracteres" *ngIf="productForm.get('name').errors?.minlength && (form.submitted || productForm.get('name').touched)"></go-input-message>
+                    <go-input-message message="* Já existe um producto com o nome inserido!" *ngIf="productForm.get('name').errors?.usedName"></go-input-message>
                 </div>
             </div>
                 

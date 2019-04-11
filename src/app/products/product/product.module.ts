@@ -6,8 +6,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { AlertModule } from 'src/app/shared/components/alert/alert.module';
 import { InputMessageModule } from 'src/app/shared/components/input-message/input-message.module';
+import { PagingModule } from 'src/app/shared/components/paging/paging.module';
 
 @NgModule({
     declarations:[ 
@@ -20,7 +20,8 @@ import { InputMessageModule } from 'src/app/shared/components/input-message/inpu
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule, 
-        InputMessageModule
+        InputMessageModule,
+        PagingModule
     ]
 })
 export class ProductModule {

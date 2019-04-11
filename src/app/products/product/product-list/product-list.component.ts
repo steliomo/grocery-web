@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { Product } from '../product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
@@ -9,25 +11,41 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
-
+export class ProductListComponent implements OnInit, OnDestroy {
+  
   products: Product[] = [];
-  pages: number[];
-  currentPage: number;
-  pageSize: number;
+  totalItems: number;
+  items: Product[];
+  query: Subject<string> = new Subject();
 
   constructor(private alertService: AlertService, private activeRoute: ActivatedRoute) { }
-
+  
   ngOnInit() {
     this.products = this.activeRoute.snapshot.data.products;
-    this.pages = [1,2,3,4,5,6];
-    this.currentPage = 1;
-    this.pageSize = 8;
-  }
+    this.totalItems = this.products.length;
+    this.items = this.products.slice(0, 8);
+    
+    this.query
+        .pipe(debounceTime(300))
+        .subscribe(value => {
+          value = value.trim().toLowerCase();
 
-  setPage(pageNumber: number){
-    this.currentPage = pageNumber;
-    this.products = this.products.slice(pageNumber - 1, this.pageSize);
+          if(value){
+            this.items = this.products.filter(product => product.name.toLowerCase().includes(value));
+            this.totalItems = this.items.length;
+          }else{
+            this.items = this.products.slice(0, 8);
+            this.totalItems = this.products.length;
+          }
+        });
+  }
+  
+  updateDate(eventValue: any){
+    this.items = this.products.slice(eventValue.startPage, eventValue.endPage);
+  }
+  
+  ngOnDestroy(): void {
+    this.query.unsubscribe();
   }
 
 }
