@@ -7,7 +7,7 @@ import { AlertService } from './alert.service';
     selector: 'go-alert',
     templateUrl: 'alert.component.html'
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent implements OnInit{
     
     @Input() timeout = 3000;
     alerts: Alert[] = [];
@@ -58,9 +58,5 @@ export class AlertComponent implements OnInit, OnDestroy {
             this.icon = 'fa fa-info-circle';
             return 'alert alert-info';
         }
-    }
-    
-    ngOnDestroy(): void {
-        this.alertService.destroy();
     }
 }

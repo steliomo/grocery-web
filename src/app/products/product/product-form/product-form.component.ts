@@ -16,12 +16,14 @@ export class ProductFormComponent implements OnInit{
     
     products: Product[] = [];
     productForm: FormGroup;
+    product: Product;
     
     constructor(private activeRoute: ActivatedRoute, 
         private formBuilder: FormBuilder, 
         private alertService: AlertService, 
         private productService: ProductService,
         private router: Router, 
+        private route: ActivatedRoute,
         private productNameValidatorService: ProductNameValidatorService) {}
         
         ngOnInit() { 
@@ -30,6 +32,16 @@ export class ProductFormComponent implements OnInit{
                 name: ['', [Validators.required, Validators.minLength(3)], 
                 this.productNameValidatorService.validateProductName() ]
             });
+
+            const productUuid = this.route.snapshot.params.productUuid
+            if(productUuid){
+                this.productService
+                    .findProductByUuid(productUuid)
+                    .subscribe(product => {
+                        this.product = product;
+                        this.productForm.patchValue(this.product);
+                    });
+            }
         }
         
         saveProduct(){
@@ -44,6 +56,23 @@ export class ProductFormComponent implements OnInit{
                     console.log(error);
                     this.alertService.danger('Erro ao criar o produto!');
                 });
+            }
+        }
+
+        updateProduct(){
+            if(this.productForm.valid && !this.productForm.pending){
+                const product = this.productForm.getRawValue() as Product;
+                this.product.name = product.name;
+                
+                this.productService
+                    .updateProduct(this.product)
+                    .subscribe(product =>{
+                        this.alertService.success('O producto '+product.name+' foi actualizado com sucesso.');
+                        this.router.navigate(['/products/product-list']);
+                    }, error => {
+                        console.log(error);
+                        this.alertService.danger('Erro ao actualizar o produto!');
+                    });
             }
         }
     }

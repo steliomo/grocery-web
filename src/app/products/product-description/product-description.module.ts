@@ -8,6 +8,7 @@ import { AlertModule } from 'src/app/shared/components/alert/alert.module';
 import { Product } from '../product/product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductDescriptionListComponent } from './product-description-list/product-description-list.component';
+import { SearchModule } from 'src/app/shared/components/search/search.module';
 
 @NgModule({
     declarations: [ 
@@ -20,7 +21,8 @@ import { ProductDescriptionListComponent } from './product-description-list/prod
         RouterModule,
         ReactiveFormsModule,
         FormsModule,
-        AlertModule
+        AlertModule,
+        SearchModule
     ]
 })
 export class ProductDescriptionModule{

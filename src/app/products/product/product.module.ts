@@ -8,6 +8,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { InputMessageModule } from 'src/app/shared/components/input-message/input-message.module';
 import { PagingModule } from 'src/app/shared/components/paging/paging.module';
+import { ConfirmationDialogModule } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
     declarations:[ 
@@ -21,7 +22,8 @@ import { PagingModule } from 'src/app/shared/components/paging/paging.module';
         ReactiveFormsModule,
         FormsModule, 
         InputMessageModule,
-        PagingModule
+        PagingModule, 
+        ConfirmationDialogModule
     ]
 })
 export class ProductModule {

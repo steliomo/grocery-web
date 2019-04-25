@@ -16,9 +16,13 @@ const routes: Routes  = [
 
         children:[
             {
-                path: 'product-form',
+                path: 'product-create',
                 component: ProductFormComponent,
-                
+            },
+
+            {
+                path: 'product-edit/:productUuid',
+                component: ProductFormComponent
             },
 
             {

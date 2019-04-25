@@ -20,6 +20,18 @@ export class ProductService{
     }
 
     findProductsByName(name: string){
-       return this.http.get<Product[]>(environment.API_URL+'/products/'+name);
+       return this.http.get<Product[]>(environment.API_URL+'/products/by-name/'+name);
+    }
+
+    findProductByUuid(uuid: string){
+       return this.http.get<Product>(environment.API_URL+'/products/'+uuid);
+    }
+
+    updateProduct(product: Product){
+       return this.http.put<Product>(environment.API_URL+'/products', product);
+    }
+
+    removeProduct(productUuid: string){
+       return this.http.delete<Product>(environment.API_URL+'/products/'+productUuid);
     }
 }

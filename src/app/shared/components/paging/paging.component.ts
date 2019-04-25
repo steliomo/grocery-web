@@ -18,7 +18,7 @@ export class PagingComponent implements OnInit {
 
   @Input()pageSize: number = 8;
 
-  @Output() pageDataEvent = new EventEmitter(); 
+  @Output() pageDataEvent:EventEmitter<Object> = new EventEmitter(); 
 
   totalPages: number;
  

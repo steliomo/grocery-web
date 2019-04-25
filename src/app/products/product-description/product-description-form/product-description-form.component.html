@@ -25,28 +25,24 @@
                 <div class="form-group row">
                     <label for="product" class="col-form-label col-md-2 text-right font-weight-bold">Producto:</label>
                     <div class="col-md-6 mb-3">    
-                        <select formControlName="product" class="form-control" id="product">
-                            <option selected disabled >Seleccione</option>
-                            <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
-                        </select>
+                        <go-search [items]="products" (searchEvent)="searchProduct($event)" (selectionEvent)="selectedProduct($event)"></go-search>
                     </div>
-                    <div class="p-1"><a class="btn btn-success fa fa-plus-square" [routerLink]="['/products/product-form']"></a></div>
+                    <div class="p-1">
+                        <a class="btn btn-success fa fa-plus-square" [routerLink]="['/products/product-create']"></a>
+                    </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
                     <div class="col-md-6 mb-3">    
-                        <input formControlName="productDescription" type="text" class="form-control" id="description">
+                        <input formControlName="productDescription" type="text" class="form-control" id="description" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="productSize" class="col-form-label col-md-2 text-right font-weight-bold">Tamanho:</label>
                     <div class="col-md-6 mb-3">    
-                        <select formControlName="productSize" class="form-control" id="productSize">
-                            <option value="">Seleccione</option>
-                            <option *ngFor="let productSize of productSizes">{{productSize}}</option>
-                        </select>
+                        <go-search (searchEvent)="searchProductDescription($event)"></go-search>
                     </div>
 
                     <div class="p-1">
@@ -66,5 +62,4 @@
         </div>
 
     </form>
-
 </div>
