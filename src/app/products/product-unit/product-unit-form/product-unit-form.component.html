@@ -1,0 +1,55 @@
+<div class="card">
+    
+  <div class="card-header bg-default ">
+      <div class="d-flex">
+          
+          <div class="mr-auto p-2 btn btn-default">
+              <span class="fa fa-inbox"></span><strong> Unidade do Produto </strong>
+          </div>
+
+          <div class="p-1">
+              <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/products/product-unit-list']"> Listar</button>
+          </div>
+
+      </div>
+  </div>
+
+  <form #form="ngForm" [formGroup]="productUnitForm" (submit)="saveProductUnit()">
+      
+      <div class="card-body">
+      
+          <div class="form-group row">
+              <label for="unit" class="col-form-label col-md-2 text-right font-weight-bold">Unidade:</label>
+              <div class="col-md-3  mb-3">    
+                  <input formControlName="unit" type="number" class="form-control" id="unit" autocomplete="off">
+                  <go-input-message message="*Campo obrigatório!" *ngIf="productUnitForm.get('unit').errors?.required && (form.submitted || productUnitForm.get('unit').touched)"></go-input-message>
+              </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="productUnitType" class="col-form-label col-md-2 text-right font-weight-bold">Tipo de Unidade:</label>
+            <div class="col-md-6 mb-3">    
+                <select formControlName="productUnitType" class="form-control">
+                  <option *ngFor="let productUnitType of productUnitTypes" [value]="productUnitType">{{productUnitType}}</option>
+                </select>
+                <go-input-message message="*Campo obrigatório!" *ngIf="productUnitForm.get('productUnitType').errors?.required && (form.submitted || productUnitForm.get('productUnitType').touched)"></go-input-message>
+            </div>
+        </div>
+              
+      </div>
+
+      <div class="card-footer d-flex">
+          <div class="p-1" *ngIf="!productUnit">
+              <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+          </div>
+          <div class="p-1" *ngIf="productUnit">
+              <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateProductUnit()"> Actualizar</button>
+          </div>
+          <div class="p-1">
+              <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+          </div>
+      </div>
+
+  </form>
+
+</div>

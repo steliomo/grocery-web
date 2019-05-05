@@ -1,7 +1,7 @@
 .header {
-    background-color: #263238;
+    background-color: #017a84;
     color: #fff;
-    height: 55px;
+    height: 60px;
 }
 
 .brand {
@@ -14,8 +14,9 @@
     font-size: 1.3em;
     font-family: "Shadows Into Light", cursive;
     text-shadow: 2px 2px #000;
+    border: 2px solid #fff;
 }
 
 .navbar-brand{
-    margin-right: .2rem;
+    margin-right: .5rem;
 }

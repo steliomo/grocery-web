@@ -48,7 +48,9 @@ export class PagingComponent implements OnInit {
     this.pageDataEvent.emit(
       {
         startPage: (this.currentPage - this.MIN_PAGING) * this.pageSize,
-        endPage: this.currentPage * this.pageSize
+        endPage: this.currentPage * this.pageSize,
+        currentPage: this.currentPage,
+        pageSize: this.pageSize
       }
     );
     

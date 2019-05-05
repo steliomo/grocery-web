@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Product } from '../../product/product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { ProductUnit } from '../../product-unit/product-unit';
+import { ProductDescription } from '../product-description';
+import { ProductDescriptionService } from '../product-description.service';
 
 @Component({
   selector: 'app-product-description-form',
@@ -13,42 +16,76 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 export class ProductDescriptionFormComponent implements OnInit{
     
     products: Product[] = [];
-    productForm: FormGroup;
+    productUnits: ProductUnit[] = [];
+    productDescriptionForm: FormGroup;
+    productDescription: ProductDescription;
     
-    constructor(private activeRoute: ActivatedRoute, private formBuilder: FormBuilder, private alertService: AlertService) {}
+    constructor(private route: ActivatedRoute, private router: Router  ,private formBuilder: FormBuilder, private alertService: AlertService, private productDescriptionService: ProductDescriptionService) {}
     
     ngOnInit() { 
-        this.products = this.activeRoute.snapshot.data.products;
-        this.productForm = this.formBuilder.group({
-            productDescription: ['', Validators.required]
+        this.products = this.route.snapshot.data.products;
+        this.productUnits = this.route.snapshot.data.productUnits;
+        this.productUnits.forEach(productUnit => productUnit.name = productUnit.unit+' '+productUnit.productUnitType);
+
+        this.productDescriptionForm = this.formBuilder.group({
+            description: ['', Validators.required]
         });
-    }
-    
-    productSizes: string[] = [
-        "1Kg",
-        "1L",
-        "200g"
-    ]
-    
-    saveProduct(){
-        const productDescription = this.productForm.getRawValue();
-        this.alertService.success('Detalhe do Producto Cadastrado com sucesso!');
-        this.productForm.reset();
+
+        this.productDescription = this.productDescriptionForm.getRawValue() as ProductDescription;
     }
 
     searchProduct(query: string){
         if(query){
             this.products = this.products.filter(product => product.name.toLowerCase().includes(query));
         }else{
-            this.products = this.activeRoute.snapshot.data.products;
+            this.products = this.route.snapshot.data.products;
         }
     }
 
-    searchProductDescription(query: string){
-        console.log(query);
+    searchProductUnit(query: string){
+        if(query){
+            this.productUnits = this.productUnits.filter(productUnit => productUnit.unit.toString().includes(query) || productUnit.productUnitType.toLowerCase().includes(query));
+        }else{
+            this.productUnits = this.route.snapshot.data.productUnits;
+            this.productUnits.forEach(productUnit => productUnit.name = productUnit.unit+' '+productUnit.productUnitType);
+        }
     }
 
     selectedProduct(product: Product){
-        console.log(product);
+        this.productDescription.product = product;
+    }
+
+    selectProductUnit(productUnit: ProductUnit){
+        this.productDescription.productUnit = productUnit;
+    }
+
+    saveProductDescription(){
+
+        if(this.productDescriptionForm.valid && !this.productDescriptionForm.pending){
+
+            if(!this.productDescription.product){
+                this.alertService.danger('O campo "Producto" deve ser seleccinado');
+                return;
+            }
+
+            if(!this.productDescription.productUnit){
+                this.alertService.danger('O campo "Unidade" deve ser seleccinado');
+                return;
+            }
+
+            const productDescription = this.productDescriptionForm.getRawValue();
+            this.productDescription.description = productDescription.description;
+
+            this.productDescriptionService
+                .createProductDescription(this.productDescription)
+                .subscribe(productDescription => {
+                    this.router.navigate(['/products']);
+                    this.alertService.success('O Detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+ ' '+productDescription.productUnit.productUnitType+'" foi criado com sucesso!')
+                }, 
+                error => {
+                    this.alertService.danger('Ocorreu um erro ao criar o detalhe do producto!');
+                    console.log(error);
+                });
+        }
     }
 }

@@ -6,4 +6,5 @@ export interface GenericEntity{
     updatedAt:Date;
     updatedBy:Date;
     entityStatus:string;
+    name: string;
 }

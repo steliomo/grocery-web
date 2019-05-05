@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { ProductDescriptionModule } from './product-description/product-description.module';
 import { AlertModule } from '../shared/components/alert/alert.module';
 import { SearchModule } from '../shared/components/search/search.module';
+import { ProductUnitModule } from './product-unit/product-unit.module';
 
 @NgModule({
     declarations: [
@@ -16,12 +17,13 @@ import { SearchModule } from '../shared/components/search/search.module';
 
     imports: [
         CommonModule,
-        ProductModule,
-        CoreModule,
         RouterModule,
-        ProductDescriptionModule,
+        CoreModule,
         AlertModule, 
-        SearchModule
+        SearchModule,
+        ProductModule,
+        ProductDescriptionModule,
+        ProductUnitModule
     ]
 })
 export class ProductsModule{

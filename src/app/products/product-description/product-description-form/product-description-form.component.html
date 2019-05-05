@@ -14,12 +14,8 @@
         </div>
     </div>
 
-    <form [formGroup]="productForm" (submit)="saveProduct()">
-
-        <div class="container">
-            <go-alert></go-alert>
-        </div>
-    
+    <form  #form="ngForm" [formGroup]="productDescriptionForm" (submit)="saveProductDescription()">
+        
         <div class="card-body">
         
                 <div class="form-group row">
@@ -35,18 +31,19 @@
                 <div class="form-group row">
                     <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
                     <div class="col-md-6 mb-3">    
-                        <input formControlName="productDescription" type="text" class="form-control" id="description" autocomplete="off">
+                        <input formControlName="description" type="text" class="form-control" id="description" autocomplete="off">
+                        <go-input-message message="*Campo obrigatório!" *ngIf="productDescriptionForm.get('description').errors?.required && (form.submitted || productDescriptionForm.get('description').touched)"></go-input-message>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="productSize" class="col-form-label col-md-2 text-right font-weight-bold">Tamanho:</label>
+                    <label for="productSize" class="col-form-label col-md-2 text-right font-weight-bold">Unidade:</label>
                     <div class="col-md-6 mb-3">    
-                        <go-search (searchEvent)="searchProductDescription($event)"></go-search>
+                        <go-search [items]="productUnits" (searchEvent)="searchProductUnit($event)" (selectionEvent)="selectProductUnit($event)"></go-search>
                     </div>
 
                     <div class="p-1">
-                        <button class="btn btn-success fa fa-plus-square"></button>
+                        <a class="btn btn-success fa fa-plus-square" [routerLink]="['/products/product-unit-create']" ></a>
                     </div>
                 </div>
                 

@@ -9,6 +9,9 @@ import { Product } from '../product/product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductDescriptionListComponent } from './product-description-list/product-description-list.component';
 import { SearchModule } from 'src/app/shared/components/search/search.module';
+import { InputMessageModule } from 'src/app/shared/components/input-message/input-message.module';
+import { PagingModule } from 'src/app/shared/components/paging/paging.module';
+import { ConfirmationDialogModule } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
     declarations: [ 
@@ -22,34 +25,10 @@ import { SearchModule } from 'src/app/shared/components/search/search.module';
         ReactiveFormsModule,
         FormsModule,
         AlertModule,
-        SearchModule
+        SearchModule,
+        InputMessageModule, 
+        PagingModule,
+        ConfirmationDialogModule
     ]
 })
-export class ProductDescriptionModule{
-
-    products: Product[] = [];
-    productForm: FormGroup;
-    
-    constructor(private activeRoute: ActivatedRoute, private formBuilder: FormBuilder, private alertService: AlertService) {}
-
-    ngOnInit() { 
-        this.products = this.activeRoute.snapshot.data.products;
-        this.productForm = this.formBuilder.group({
-            product: ['', Validators.required ],
-            productDescription: ['', Validators.required],
-            productSize: ['', Validators.required]
-        });
-    }
-
-    productSizes: string[] = [
-        "1Kg",
-        "1L",
-        "200g"
-    ]
-
-    saveProduct(){
-        const productDescription = this.productForm.getRawValue();
-        this.alertService.success('Detalhe do Producto Cadastrado com sucesso!');
-        this.productForm.reset();
-    }
-}
+export class ProductDescriptionModule{}

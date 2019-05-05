@@ -21,14 +21,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   
   constructor() { }
   
-  ngOnInit() {
+  ngOnInit() {  
     this.selectedItem = { name: "Seleccione..." };
     this.query
-    .pipe(debounceTime(300))
-    .subscribe(value => {
-      value = value.trim().toLowerCase();
-      this.searchEvent.emit(value);
-    });
+        .pipe(debounceTime(300))
+        .subscribe(value => {
+          value = value.trim().toLowerCase();
+          this.searchEvent.emit(value);
+        });
   }
   
   onSelect(item: Object){

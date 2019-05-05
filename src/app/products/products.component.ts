@@ -12,7 +12,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this.alertService.destroy();
+    // this.alertService.destroy();
   }
 
 }
