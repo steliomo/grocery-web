@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { ProductsModule } from './products/products.module';
 import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './home/home.module';
+import { StocksModule } from './stocks/stocks.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     ErrorsModule,
     ProductsModule, 
-    HomeModule
+    HomeModule, 
+    StocksModule
   ],
   providers: [],
   bootstrap: [AppComponent]

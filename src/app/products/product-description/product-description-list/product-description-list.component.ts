@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { ProductDescription } from '../product-description';
 import { ProductDescriptionService } from '../product-description.service';
 import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
 
 @Component({
     templateUrl: 'product-description-list.component.html'
@@ -15,8 +16,9 @@ export class ProductDescriptionListComponent implements OnInit, OnDestroy{
     totalItems: number;
     items: ProductDescription [];
     query: Subject<string> = new Subject();
+    eventValue: any;
     
-    constructor(private productDescriptionService: ProductDescriptionService, private route: ActivatedRoute, private confirmationDialogService: ConfirmationDialogService){}
+    constructor(private productDescriptionService: ProductDescriptionService, private route: ActivatedRoute, private confirmationDialogService: ConfirmationDialogService, private alertService: AlertService){}
     
     ngOnInit(): void {
         const productDescriptionDTO = this.route.snapshot.data.productDescriptionDTO;
@@ -44,11 +46,12 @@ export class ProductDescriptionListComponent implements OnInit, OnDestroy{
     }
     
     updateDate(eventValue: any){
+        this.eventValue = eventValue
         this.productDescriptionService
-        .fetchdAllProductDescriptions(eventValue.currentPage - 1, eventValue.pageSize)
-        .subscribe(productDescriptionDTO => {
-            this.items = productDescriptionDTO.productDescriptions;
-        });
+            .fetchdAllProductDescriptions(eventValue.currentPage - 1, eventValue.pageSize)
+            .subscribe(productDescriptionDTO => {
+                this.items = productDescriptionDTO.productDescriptions;
+            });
     }
     
     ngOnDestroy(): void {
@@ -60,6 +63,19 @@ export class ProductDescriptionListComponent implements OnInit, OnDestroy{
     }
 
     removeProductDescription(productDescription: ProductDescription){
-
+        this.productDescriptionService
+            .removeProductDescription(productDescription.uuid)
+            .subscribe( productDescription => {
+                this.alertService.success('O detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+ productDescription.productUnit.unit+ ''+productDescription.productUnit.productUnitType+'" foi removido com sucesso!');
+                this.productDescriptionService
+                    .fetchdAllProductDescriptions(this.eventValue.currentPage - 1, this.eventValue.pageSize)
+                    .subscribe(productDescriptionDTO => {
+                        this.items = productDescriptionDTO.productDescriptions;
+                    });
+            },
+            error => {
+                this.alertService.danger('Ocorreu um erro ao remover o detalhe do producto');
+                console.log(error);
+            });
     }
 }

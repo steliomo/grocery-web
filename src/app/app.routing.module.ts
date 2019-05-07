@@ -13,6 +13,8 @@ import { ProductUnitResolver } from './products/product-description/product-unit
 import { ProductUnitListComponent } from './products/product-unit/product-unit-list/product-unit-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDescriptionResolver } from './products/product-description/product-description.resolver';
+import { ProductDescriptionValueResolver } from './products/product-description/product-description-value.resolver';
+import { StocksComponent } from './stocks/stocks.component';
 
 const routes: Routes  = [
     {
@@ -38,7 +40,8 @@ const routes: Routes  = [
                 component: ProductDescriptionFormComponent,
                 resolve: {
                     products: ProductResolver,
-                    productUnits: ProductUnitResolver
+                    productUnits: ProductUnitResolver, 
+                    productDescription: ProductDescriptionValueResolver
                 }
             },
 
@@ -87,6 +90,15 @@ const routes: Routes  = [
                 }
             }
         ]
+    },
+    {
+        path: 'stocks',
+        component: StocksComponent
+    },
+    
+    {
+        path: '',
+        component: HomeComponent
     },
     
     {

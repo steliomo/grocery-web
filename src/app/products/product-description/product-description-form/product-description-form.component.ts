@@ -27,11 +27,18 @@ export class ProductDescriptionFormComponent implements OnInit{
         this.productUnits = this.route.snapshot.data.productUnits;
         this.productUnits.forEach(productUnit => productUnit.name = productUnit.unit+' '+productUnit.productUnitType);
 
+        this.productDescription = this.route.snapshot.data.productDescription;
+
         this.productDescriptionForm = this.formBuilder.group({
             description: ['', Validators.required]
         });
 
-        this.productDescription = this.productDescriptionForm.getRawValue() as ProductDescription;
+        if(this.productDescription){
+            this.productDescription.productUnit.name = this.productDescription.productUnit.unit+''+this.productDescription.productUnit.productUnitType;
+            this.productDescriptionForm.patchValue(this.productDescription);
+        }else{
+            this.productDescription = this.productDescriptionForm.getRawValue() as ProductDescription;
+        }
     }
 
     searchProduct(query: string){
@@ -87,5 +94,26 @@ export class ProductDescriptionFormComponent implements OnInit{
                     console.log(error);
                 });
         }
+    }
+
+    updateProductDescription(){
+
+        if(this.productDescriptionForm.valid && !this.productDescriptionForm.pending){
+
+            const productDescription = this.productDescriptionForm.getRawValue();
+            this.productDescription.description = productDescription.description;
+
+            this.productDescriptionService
+                .upadateProductDescription(this.productDescription)
+                .subscribe(productDescription => {
+                    this.router.navigate(['/products']);
+                    this.alertService.success('O Detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+ ' '+productDescription.productUnit.productUnitType+'" foi actualizado com sucesso!')
+                }, 
+                error => {
+                    this.alertService.danger('Ocorreu um erro ao actualizar o detalhe do producto!');
+                    console.log(error);
+                });
+        }
+
     }
 }

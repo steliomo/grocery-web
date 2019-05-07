@@ -29,4 +29,12 @@ export class ProductDescriptionService {
     fetchProductDescriptionByUuid(productDescriptionUuid: string){
         return this.http.get<ProductDescription>(environment.API_URL +'/product-descriptions/'+ productDescriptionUuid);
     }
+
+    upadateProductDescription(productDescription: ProductDescription){
+        return this.http.put<ProductDescription>(environment.API_URL+'/product-descriptions', productDescription);
+    }
+
+    removeProductDescription(productDescriptionUuid: string){
+        return this.http.delete<ProductDescription>(environment.API_URL+'/product-descriptions/'+productDescriptionUuid);
+    }
 }

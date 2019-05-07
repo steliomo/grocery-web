@@ -11,18 +11,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   
   @Input() items:Object[] =[];
   
+  @Input()selectedItem: Object;
+
   @Output() searchEvent = new EventEmitter();
 
   @Output() selectionEvent = new EventEmitter();
   
   query: Subject<string> = new Subject<string>();
   
-  selectedItem: Object;
-  
   constructor() { }
   
-  ngOnInit() {  
-    this.selectedItem = { name: "Seleccione..." };
+  ngOnInit() {
+    
+    if(!this.selectedItem){
+      this.selectedItem = { name: "Seleccione..." };
+    }
+
     this.query
         .pipe(debounceTime(300))
         .subscribe(value => {
