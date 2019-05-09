@@ -1,0 +1,94 @@
+<div class="card">
+    
+  <div class="card-header bg-default ">
+      <div class="d-flex">
+          
+          <div class="mr-auto p-2 btn btn-default">
+              <span class="fa fa-inbox"></span><strong> Stock do Produto </strong>
+          </div>
+
+          <div class="p-1">
+              <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/stocks']"> Listar</button>
+          </div>
+
+      </div>
+  </div>
+
+  <form #form="ngForm" [formGroup]="stockForm" (submit)="saveStock()">
+      
+      <div class="card-body">
+
+          <div class="form-group row">
+              <label for="productDescription" class="col-form-label col-md-2 text-right font-weight-bold">Produto:</label>
+              <div class="col-md-6 mb-3">    
+                  <go-search [items]="productDescriptions" (searchEvent)="searchProduct($event)" (selectionEvent)="selectProduct($event)"></go-search>
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="purchasePrice" class="col-form-label col-md-2 text-right font-weight-bold">Preço de compra:</label>
+              <div class="col-md-4 mb-3" > 
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-money"></span></div>
+                  </div>   
+                      
+                  <input formControlName="purchasePrice" type="number" class="form-control" id="purchasePrice" autocomplete="off">
+                      
+                  <div class="input-group-append">
+                      <span class="input-group-text">MT</span>
+                  </div>
+                </div>  
+                <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('purchasePrice').errors?.required && (form.submitted || stockForm.get('purchasePrice').touched)"></go-input-message>
+               </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="salePrice" class="col-form-label col-md-2 text-right font-weight-bold">Preço de venda:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <div class="input-group-text"><span class="fa fa-money"></span></div>
+                  </div>   
+                      
+                  <input formControlName="salePrice" type="number" class="form-control" id="salePrice" autocomplete="off">
+                      
+                  <div class="input-group-append">
+                      <span class="input-group-text">MT</span>
+                  </div>
+                </div> 
+                <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('salePrice').errors?.required && (form.submitted || stockForm.get('salePrice').touched)"></go-input-message>
+               </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="quantity" class="col-form-label col-md-2 text-right font-weight-bold">Quantidade:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-cart-plus"></span></div>
+                  </div>   
+                    
+                  <input formControlName="quantity" type="number" class="form-control" id="quantity" autocomplete="off" maxlength="2">
+                </div> 
+                <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('quantity').errors?.required && (form.submitted || stockForm.get('quantity').touched)"></go-input-message>
+               </div>
+          </div>
+              
+      </div>
+
+      <div class="card-footer d-flex">
+          <div class="p-1" *ngIf="!product">
+              <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+          </div>
+          <div class="p-1" *ngIf="product">
+              <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateProduct()"> Actualizar</button>
+          </div>
+          <div class="p-1">
+              <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+          </div>
+      </div>
+
+  </form>
+
+</div>

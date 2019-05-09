@@ -15,6 +15,10 @@ import { HomeComponent } from './home/home.component';
 import { ProductDescriptionResolver } from './products/product-description/product-description.resolver';
 import { ProductDescriptionValueResolver } from './products/product-description/product-description-value.resolver';
 import { StocksComponent } from './stocks/stocks.component';
+import { StockFormComponent } from './stocks/stock-form/stock-form.component';
+import { StockListComponent } from './stocks/stock-list/stock-list.component';
+import { resolve } from 'url';
+import { StockResolver } from './stocks/stock.resolver';
 
 const routes: Routes  = [
     {
@@ -91,9 +95,27 @@ const routes: Routes  = [
             }
         ]
     },
+
     {
         path: 'stocks',
-        component: StocksComponent
+        component: StocksComponent,
+        children: [
+            {
+                path: '',
+                component: StockListComponent,
+                resolve: {
+                    stockDTO: StockResolver
+                }
+            },
+
+            {
+                path: 'stock-create',
+                component: StockFormComponent, 
+                resolve: {
+                    productDescriptionDTO: ProductDescriptionResolver
+                }
+            }
+        ]
     },
     
     {

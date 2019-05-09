@@ -9,7 +9,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit, OnDestroy {
   
-  @Input() items:Object[] =[];
+  @Input() items:Object[] = [];
   
   @Input()selectedItem: Object;
 
