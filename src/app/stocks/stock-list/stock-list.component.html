@@ -4,7 +4,7 @@
         <div class="d-flex">
             
             <div class="mr-auto p-2 btn btn-default">
-                <span class="fa fa-inbox"></span><strong> Detalhes do Produto </strong>
+                <span class="fa fa-inbox"></span><strong> Stocks </strong>
             </div>
 
             <div class="p-1">
@@ -41,8 +41,8 @@
                 <td class="text-center">{{ stock.quantity }}</td>
                 <td>
                   <div class="text-right">
-                      <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/products/product-description-edit', stock.uuid]"></button>
-                      <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#productDescriptionModalCenter" (click)="selectedProductDescription(stock)"></button>
+                      <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/stocks/stock-edit', stock.uuid]"></button>
+                      <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#stockModalCenter" (click)="selectedStock(stock)"></button>
                   </div>
                 </td>
               </tr>
@@ -59,4 +59,4 @@
 
 </div>
 
-<go-confirmation-dialog [dialogId]="'productDescriptionModalCenter'" (dialogEvent)="removeProductDescription($event)" ></go-confirmation-dialog>
+<go-confirmation-dialog [dialogId]="'stockModalCenter'" (dialogEvent)="removeStock($event)" ></go-confirmation-dialog>

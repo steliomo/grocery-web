@@ -19,6 +19,7 @@ import { StockFormComponent } from './stocks/stock-form/stock-form.component';
 import { StockListComponent } from './stocks/stock-list/stock-list.component';
 import { resolve } from 'url';
 import { StockResolver } from './stocks/stock.resolver';
+import { StockValueResolver } from './stocks/stock-value.resolver';
 
 const routes: Routes  = [
     {
@@ -113,6 +114,15 @@ const routes: Routes  = [
                 component: StockFormComponent, 
                 resolve: {
                     productDescriptionDTO: ProductDescriptionResolver
+                }
+            },
+
+            {
+                path: 'stock-edit/:stockUuid',
+                component: StockFormComponent,
+                resolve: {
+                    productDescriptionDTO: ProductDescriptionResolver,
+                    stock: StockValueResolver
                 }
             }
         ]

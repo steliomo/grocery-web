@@ -16,9 +16,11 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 })
 export class StockFormComponent implements OnInit {
 
-  stockForm: FormGroup;
-  productDescriptions: ProductDescription[] = [];
-  productDescription: ProductDescription;
+  private stockForm: FormGroup;
+  private productDescriptions: ProductDescription[] = [];
+  private productDescription: ProductDescription;
+  private stock: Stock;
+
 
   constructor(  private formBuilder: FormBuilder, 
                 private route: ActivatedRoute, 
@@ -30,12 +32,20 @@ export class StockFormComponent implements OnInit {
 
   ngOnInit() {
     this.productDescriptions = this.getProducts();
+    const stock = this.route.snapshot.data.stock;
 
     this.stockForm = this.formBuilder.group({
       purchasePrice: ['', Validators.required],
       salePrice: ['', Validators.required],
       quantity: ['', Validators.required ]
     });
+
+    if(stock){
+      this.stock = stock;
+      this.productDescription = this.stock.productDescription;
+      this.productDescription.name = this.getProductName(this.productDescription);
+      this.stockForm.patchValue(this.stock);
+    }
   }
 
   private getProductName(productDescription: ProductDescription): string{
@@ -80,6 +90,27 @@ export class StockFormComponent implements OnInit {
           },
           error => {
             this.alertService.danger('Ocorreu um erro ao adicionar o stock do producto');
+          });
+    }
+  }
+
+  updateStock(){
+    if(this.stockForm.valid && !this.stockForm.pending){
+      const stock = this.stockForm.getRawValue() as Stock;
+
+      this.stock.productDescription = this.productDescription;
+      this.stock.purchasePrice = stock.purchasePrice;
+      this.stock.salePrice = stock.salePrice;
+      this.stock.quantity = stock.quantity;
+      
+      this.stockService
+          .updateStock(this.stock)
+          .subscribe(stock => {
+            this.alertService.success('O stock do produto "'+this.getProductName(stock.productDescription)+'" foi actualizado com sucesso!');
+            this.router.navigate(['/stocks']);
+          },
+          error => {
+            this.alertService.danger('Ocorreu um erro ao actualizar o stock do producto');
           });
     }
   }

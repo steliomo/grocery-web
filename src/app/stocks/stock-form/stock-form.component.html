@@ -21,7 +21,7 @@
           <div class="form-group row">
               <label for="productDescription" class="col-form-label col-md-2 text-right font-weight-bold">Produto:</label>
               <div class="col-md-6 mb-3">    
-                  <go-search [items]="productDescriptions" (searchEvent)="searchProduct($event)" (selectionEvent)="selectProduct($event)"></go-search>
+                  <go-search [items]="productDescriptions" [selectedItem]="productDescription" (searchEvent)="searchProduct($event)" (selectionEvent)="selectProduct($event)"></go-search>
               </div>
           </div>
       
@@ -78,11 +78,11 @@
       </div>
 
       <div class="card-footer d-flex">
-          <div class="p-1" *ngIf="!product">
+          <div class="p-1" *ngIf="!stock">
               <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
           </div>
-          <div class="p-1" *ngIf="product">
-              <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateProduct()"> Actualizar</button>
+          <div class="p-1" *ngIf="stock">
+              <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateStock()"> Actualizar</button>
           </div>
           <div class="p-1">
               <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
