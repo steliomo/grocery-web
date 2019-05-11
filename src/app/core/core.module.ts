@@ -5,6 +5,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { RouterModule } from '@angular/router';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingModule } from '../shared/components/loading/loading.module';
 
 @NgModule({
     declarations : [
@@ -19,7 +20,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
     imports : [
         CommonModule,
-        RouterModule
+        RouterModule, 
+        LoadingModule
     ],
     
     providers: [
