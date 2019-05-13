@@ -1,11 +1,16 @@
 <header class="header">
   <nav class="navbar navbar-default">
-      <div class="navbar-header">
+     
+     <div class="navbar-header">
           <label class="navbar-brand brand">mO</label>
           <label class="navbar-text">Mercearias Online</label>
       </div>
 
-      <label class="navbar-text"><span class="fa fa-sign-out"> Sair</span></label>
+      <div *ngIf="getUsername()">
+        <i class="fa fa-user-circle mr-1"></i>
+        <span>{{getUsername()+' | '}}</span>
+        <button class="btn btn-danger fa fa-sign-out" (click)="logout()"> Sair</button>
+      </div>
       
   </nav>
 </header>

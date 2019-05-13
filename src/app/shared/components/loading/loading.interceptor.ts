@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { LoadingService } from './loading.service';
 
 @Injectable({
@@ -19,7 +19,11 @@ export class LoadingInterceptor implements HttpInterceptor {
                        }else{
                            this.loadingService.start()
                        }
-                   }));
+                   }))
+                   .pipe(catchError(error => {
+                    this.loadingService.stop();
+                    throw error;
+                }));
     }
 
 }

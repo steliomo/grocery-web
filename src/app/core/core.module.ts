@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingModule } from '../shared/components/loading/loading.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
     declarations : [
@@ -21,7 +22,8 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
     imports : [
         CommonModule,
         RouterModule, 
-        LoadingModule
+        LoadingModule,
+        LoginModule
     ],
     
     providers: [

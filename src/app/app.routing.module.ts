@@ -17,19 +17,23 @@ import { ProductDescriptionValueResolver } from './products/product-description/
 import { StocksComponent } from './stocks/stocks.component';
 import { StockFormComponent } from './stocks/stock-form/stock-form.component';
 import { StockListComponent } from './stocks/stock-list/stock-list.component';
-import { resolve } from 'url';
 import { StockResolver } from './stocks/stock.resolver';
 import { StockValueResolver } from './stocks/stock-value.resolver';
+import { LoginComponent } from './core/login/login.component';
+import { LoginGuard } from './core/auth/login.guard';
+import { AuthGuard } from './core/auth/auth.guard';
 
 const routes: Routes  = [
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard]
     },
     
     {
         path: 'products',
         component: ProductsComponent,
+        canActivate: [AuthGuard],
         
         children:[
             {
@@ -100,6 +104,7 @@ const routes: Routes  = [
     {
         path: 'stocks',
         component: StocksComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -130,7 +135,14 @@ const routes: Routes  = [
     
     {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
+
+    {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [LoginGuard]
     },
     
     {
