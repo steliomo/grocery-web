@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit {
 
       this.loginService
           .login(user)
-          .subscribe(user => {
-            this.tokenService.setFullName(user.fullName);
+          .subscribe(context => {
+            this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
+            this.tokenService.setFullName(context.fullName);
             this.router.navigate(['home']);
           }, error => {
             this.tokenService.removeToken();
-            this.alertService.danger('Credências inválidas');
+            this.alertService.danger('Ocorreu um erro ao logar....');
             console.log(error);
           })
     }

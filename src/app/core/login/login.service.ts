@@ -12,11 +12,9 @@ export class LoginService {
     constructor(private http: HttpClient, private tokenService: TokenServie){}
 
     login(user: User){
-
-        this.tokenService
-            .setToken(this.tokenService.getBasickToken(user.username, user.password))
-
-        return this.http.get<User>(environment.API_URL+ '/users');
+        return this.http.post<User>(
+            environment.API_URL+ '/users/login', { username: user.username, password: user.password}
+        );
     }
 
 }
