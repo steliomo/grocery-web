@@ -16,10 +16,10 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 })
 export class StockFormComponent implements OnInit {
 
-  private stockForm: FormGroup;
-  private productDescriptions: ProductDescription[] = [];
-  private productDescription: ProductDescription;
-  private stock: Stock;
+  stockForm: FormGroup;
+  productDescriptions: ProductDescription[] = [];
+  productDescription: ProductDescription;
+  stock: Stock;
 
 
   constructor(  private formBuilder: FormBuilder, 

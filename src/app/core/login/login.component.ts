@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  private loginForm: FormGroup;
+  
+  loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private tokenService: TokenServie, private alertService: AlertService, private router: Router) { }
 

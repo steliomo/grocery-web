@@ -1,7 +1,7 @@
 <div class="dropdown">
 
   <a class="btn btn-default dropdown-toggle text-left col-md-12" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{selectedItem.name}}
+    {{selectedItem?.name}}
   </a>
 
   <div class="dropdown-menu col-md-12" aria-labelledby="dropdownMenuLink">
@@ -19,7 +19,7 @@
     
     <div class="dropdown-divider"></div>
     
-    <a class="dropdown-item" *ngFor="let item of items" (click)="onSelect(item)" [ngClass]="{ active: selectedItem.id === item.id }">{{item.name}}</a>
+    <a class="dropdown-item" *ngFor="let item of items" (click)="onSelect(item)" [ngClass]="{ active: selectedItem.id === item.id }">{{item?.name}}</a>
 
     <div class="container text-center text-danger" *ngIf="items.length === 0">
       <small class="mutted">Nenhum item encontrado!</small>

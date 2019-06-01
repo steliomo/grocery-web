@@ -11,7 +11,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   
   @Input() items:Object[] = [];
   
-  @Input() selectedItem: Object;
+  @Input() selectedItem: any = { name: "Seleccione..." };
 
   @Output() searchEvent = new EventEmitter();
 
