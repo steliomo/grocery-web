@@ -1,0 +1,32 @@
+.main-menu{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.menu-item a{ 
+    background-color: #1976d2;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: "Shadows Into Light", cursive;
+    margin: 2px;
+    padding: 6px;
+    color: #fff;
+    border: 1px solid  #1976d2;
+}
+
+.menu-item a:hover { 
+    background-color: #fff;
+    color:  #263238;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.menu-item-active { 
+    background-color: #fff !important;
+    color:  #263238 !important;
+    text-shadow: none;
+    padding: 5px;
+    font-weight: bold;
+    box-shadow: 1px 1px #560027;
+}

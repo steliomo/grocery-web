@@ -1,0 +1,106 @@
+<div class="card">
+    
+    <div class="card-header bg-default ">
+        <div class="d-flex">
+            
+            <div class="mr-auto p-2 btn btn-default">
+                <span class="fa fa-shopping-basket"></span><strong> Mercearia </strong>
+            </div>
+  
+            <div class="p-1">
+                <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/groceries']"> Listar</button>
+            </div>
+  
+        </div>
+    </div>
+  
+    <form #form="ngForm" [formGroup]="groceryForm" (submit)="saveGrocery()">
+        
+        <div class="card-body">
+  
+            <div class="form-group row">
+                <label for="name" class="col-form-label col-md-2 text-right font-weight-bold">Nome:</label>
+                <div class="col-md-6 mb-3">    
+                    <input formControlName="name" type="text" class="form-control" id="name" autocomplete="off">
+                    <go-input-message message="*Campo obrigatório!" *ngIf="groceryForm.get('name').errors?.required && (form.submitted || groceryForm.get('name').touched)"></go-input-message>
+                    <go-input-message message="* O nome deve ter no mínimo 3 caracteres" *ngIf="groceryForm.get('name').errors?.minlength && (form.submitted || groceryForm.get('name').touched)"></go-input-message>
+                    <go-input-message message="* Já existe um producto com o nome inserido!" *ngIf="groceryForm.get('name').errors?.usedName"></go-input-message>
+                </div>
+            </div>
+        
+            <div class="form-group row">
+                <label for="address" class="col-form-label col-md-2 text-right font-weight-bold">Endereço:</label>
+                <div class="col-md-6 mb-3" > 
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><span class="fa fa-address-card"></span></div>
+                    </div>   
+                        
+                    <textarea formControlName="address" class="form-control" id="address" autocomplete="off"></textarea>
+                        
+                  </div>  
+                  <go-input-message message="*Campo obrigatório!" *ngIf="groceryForm.get('address').errors?.required && (form.submitted || groceryForm.get('address').touched)"></go-input-message>
+                 </div>
+            </div>
+  
+            <div class="form-group row">
+                <label for="phoneNumber" class="col-form-label col-md-2 text-right font-weight-bold">Telefone:</label>
+                <div class="col-md-4 mb-3">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><span class="fa fa-mobile"></span></div>
+                    </div>   
+                        
+                    <input formControlName="phoneNumber" type="text" class="form-control" id="phoneNumber" autocomplete="off">
+                        
+                  </div> 
+                  <go-input-message message="*Campo obrigatório!" *ngIf="groceryForm.get('phoneNumber').errors?.required && (form.submitted || groceryForm.get('phoneNumber').touched)"></go-input-message>
+                 </div>
+            </div>
+  
+            <div class="form-group row">
+                <label for="phoneNumberOptional" class="col-form-label col-md-2 text-right font-weight-bold">Telefone (2):</label>
+                <div class="col-md-4 mb-3">
+                  <div class="input-group">
+                    
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><span class="fa fa-mobile"></span></div>
+                    </div>   
+                      
+                    <input formControlName="phoneNumberOptional" type="text" class="form-control" id="phoneNumberOptional" autocomplete="off" >
+                  </div> 
+                 </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-form-label col-md-2 text-right font-weight-bold">Email:</label>
+                <div class="col-md-4 mb-3">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><span class="fa fa-at"></span></div>
+                    </div>   
+                      
+                    <input formControlName="email" type="email" class="form-control" id="email" autocomplete="off">
+                  </div>
+                  <go-input-message message="*Email inválido!" *ngIf="groceryForm.get('email').errors?.email && (form.submitted || groceryForm.get('email').touched)"></go-input-message>
+                  
+                 </div>
+            </div>
+                
+        </div>
+  
+        <div class="card-footer d-flex">
+            <div class="p-1" *ngIf="!grocery">
+                <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+            </div>
+            <div class="p-1" *ngIf="grocery">
+                <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateStock()"> Actualizar</button>
+            </div>
+            <div class="p-1">
+                <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+            </div>
+        </div>
+  
+    </form>
+  
+</div>

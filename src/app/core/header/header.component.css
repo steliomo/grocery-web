@@ -20,3 +20,21 @@
 .navbar-brand{
     margin-right: .5rem;
 }
+
+.dropdown-menu{
+   margin-top: 25%;
+   border-radius: unset;
+}
+
+.dropdown-item:hover{
+    background-color: #017a84;
+    color: #fff;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+.btn {
+    vertical-align: unset;
+}

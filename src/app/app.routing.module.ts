@@ -22,6 +22,15 @@ import { StockValueResolver } from './stocks/stock-value.resolver';
 import { LoginComponent } from './core/login/login.component';
 import { LoginGuard } from './core/auth/login.guard';
 import { AuthGuard } from './core/auth/auth.guard';
+import { GroceriesComponent } from './groceries/groceries.component';
+import { GroceryListComponent } from './groceries/grocery-list/grocery-list.component';
+import { GroceryFormComponent } from './groceries/grocery-form/grocery-form.component';
+import { GroceryResolver } from './groceries/grocery.resolver';
+import { UsersComponent } from './users/users.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
+import { UserRoleResolver } from './users/user-role.resolver';
+import { GroceryUserResolver } from './users/grocery-user.resolver';
 
 const routes: Routes  = [
     {
@@ -128,6 +137,48 @@ const routes: Routes  = [
                 resolve: {
                     productDescriptionDTO: ProductDescriptionResolver,
                     stock: StockValueResolver
+                }
+            }
+        ]
+    },
+
+    {
+        path: 'groceries',
+        component: GroceriesComponent,
+        children: [
+            {
+                path: '',
+                component: GroceryListComponent,
+                resolve: {
+                    groceryDTO: GroceryResolver
+                }
+            },
+
+            {
+                path: 'grocery-create',
+                component: GroceryFormComponent
+            }
+        ]
+    },
+
+    {
+        path: 'users',
+        component: UsersComponent,
+        children: [
+            {
+                path: '',
+                component: UserListComponent,
+                resolve: {
+                    groceryUsers: GroceryUserResolver
+                }
+            },
+
+            {
+                path: 'user-create',
+                component: UserFormComponent,
+                resolve: {
+                    groceryDTO: GroceryResolver,
+                    userRoles: UserRoleResolver
                 }
             }
         ]

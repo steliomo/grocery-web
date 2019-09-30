@@ -1,0 +1,123 @@
+<div class="card">
+    
+  <div class="card-header bg-default ">
+      <div class="d-flex">
+          
+          <div class="mr-auto p-2 btn btn-default">
+              <span class="fa fa-user"></span><strong> Utilizador </strong>
+          </div>
+
+          <div class="p-1">
+              <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/users']"> Listar</button>
+          </div>
+
+      </div>
+  </div>
+
+  <form #form="ngForm" [formGroup]="userForm" (submit)="saveUser()">
+      
+      <div class="card-body">
+
+          <div class="form-group row">
+              <label for="fullName" class="col-form-label col-md-2 text-right font-weight-bold">Nome Completo:</label>
+              <div class="col-md-6 mb-3">    
+                  <input formControlName="fullName" type="text" class="form-control" id="name" autocomplete="off">
+                  <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('fullName').errors?.required && (form.submitted || userForm.get('fullName').touched)"></go-input-message>
+              </div>
+          </div>
+      
+          <div class="form-group row">
+            <label for="grocery" class="col-form-label col-md-2 text-right font-weight-bold">Mercearia:</label>
+            <div class="col-md-6 mb-3">    
+                <go-search [items]="groceries" [selectedItem]="grocery" (searchEvent)="searchGrocery($event)" (selectionEvent)="selectGrocery($event)"></go-search>
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="username" class="col-form-label col-md-2 text-right font-weight-bold">Utilizador:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <div class="input-group-text"><span class="fa fa-user"></span></div>
+                  </div>   
+                      
+                  <input formControlName="username" type="text" class="form-control" id="username" autocomplete="off">
+                      
+                </div> 
+                <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('username').errors?.required && (form.submitted || userForm.get('username').touched)"></go-input-message>
+               </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="password" class="col-form-label col-md-2 text-right font-weight-bold">Senha:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-key"></span></div>
+                  </div>   
+                    
+                  <input formControlName="password" type="password" class="form-control" id="password" autocomplete="off" >
+                </div>
+                <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('password').errors?.required && (form.submitted || userForm.get('password').touched)"></go-input-message>
+               </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="userRole" class="col-form-label col-md-2 text-right font-weight-bold">Função:</label>
+            <div class="col-md-4 mb-3">
+              <select formControlName="userRole" class="form-control">
+                <option *ngFor="let userRole of userRoles" [value]="userRole">{{userRole}}</option>
+              </select>
+              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('userRole').errors?.required && (form.submitted || userForm.get('userRole').touched)"></go-input-message>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="expiryDate" class="col-form-label col-md-2 text-right font-weight-bold">Data de Validade:</label>
+            <div class="col-md-4 mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-user"></span></div>
+                </div>   
+                    
+                <input formControlName="expiryDate" type="date" class="form-control" id="expiryDate" value="2017-06-01" autocomplete="off">
+                    
+              </div> 
+              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('expiryDate').errors?.required && (form.submitted || userForm.get('expiryDate').touched)"></go-input-message>
+             </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="email" class="col-form-label col-md-2 text-right font-weight-bold">Email:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-at"></span></div>
+                  </div>   
+                    
+                  <input formControlName="email" type="email" class="form-control" id="email" autocomplete="off">
+                </div>
+                
+                <go-input-message message="*Email inválido!" *ngIf="userForm.get('email').errors?.email && (form.submitted || userForm.get('email').touched)"></go-input-message>
+                
+               </div>
+          </div>
+              
+      </div>
+
+      <div class="card-footer d-flex">
+          <div class="p-1" *ngIf="!User">
+              <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+          </div>
+          <div class="p-1" *ngIf="User">
+              <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateStock()"> Actualizar</button>
+          </div>
+          <div class="p-1">
+              <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+          </div>
+      </div>
+
+  </form>
+
+</div>

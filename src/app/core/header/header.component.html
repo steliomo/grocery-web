@@ -7,9 +7,36 @@
       </div>
 
       <div *ngIf="getUsername()">
-        <i class="fa fa-user-circle mr-1"></i>
-        <span>{{getUsername()+' | '}}</span>
-        <button class="btn btn-danger fa fa-sign-out" (click)="logout()"> Sair</button>
+
+          <div class="d-inline">
+              <i class="fa fa-user-circle mr-1"></i>
+              <span>{{getUsername()}}</span>
+          </div>
+
+        <div class="dropdown d-inline ml-2">
+            <button class="btn bbtn btn-outline-light fa fa-th" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+
+              <div  class="dropdown-item" [routerLink]="['/groceries']">
+                <img class="img-fluid w-25 mr-2" src="assets/img/shop.png" alt="Mercearias">
+                <label class="navbar-text">Mercearias</label>
+              </div>
+
+              <div  class="dropdown-item" [routerLink]="['/users']">
+                  <img class="img-fluid w-25 mr-2" src="assets/img/login.png" alt="Utilizadores">
+                  <label class="navbar-text">Utilizadores</label>
+              </div>
+
+              <div class="dropdown-divider"></div>
+
+              <div  class="dropdown-item" (click)="logout()">
+                  <img class="img-fluid w-25 mr-2" src="assets/img/logout.png" alt="Sair">
+                  <label class="navbar-text">Sair</label>
+              </div>
+
+            </div>
+        </div>
+
       </div>
       
   </nav>
