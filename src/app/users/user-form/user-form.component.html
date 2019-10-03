@@ -107,10 +107,10 @@
       </div>
 
       <div class="card-footer d-flex">
-          <div class="p-1" *ngIf="!User">
+          <div class="p-1" *ngIf="!groceryUserDTO">
               <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
           </div>
-          <div class="p-1" *ngIf="User">
+          <div class="p-1" *ngIf="groceryUserDTO">
               <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateStock()"> Actualizar</button>
           </div>
           <div class="p-1">

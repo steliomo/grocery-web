@@ -48,11 +48,11 @@ export class UserFormComponent implements OnInit {
         this.alertService.danger("A mercearia deve ser seleccionada!");
         return;
       }
-
-      this.groceryUserDTO = this.userForm.getRawValue() as GroceryUserDTO;
-      this.groceryUserDTO.grocery = this.grocery;
       
-      this.userService.createGroceryUser(this.groceryUserDTO)
+      const groceryUserDTO: GroceryUserDTO = this.userForm.getRawValue() as GroceryUserDTO;
+      groceryUserDTO.grocery = this.grocery;
+      
+      this.userService.createGroceryUser(groceryUserDTO)
                       .subscribe(groceryUserDTO => {
                         this.alertService.success('O (A) utilizador(a) '+groceryUserDTO.fullName+ ' foi registado(a) com sucesso!');
                         this.router.navigate(['users']);
@@ -66,6 +66,10 @@ export class UserFormComponent implements OnInit {
 
   selectGrocery(grocery: Grocery){
     this.grocery = grocery;
+  }
+
+  searchGrocery(query: string){
+
   }
 
 }

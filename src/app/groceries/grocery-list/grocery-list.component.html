@@ -19,7 +19,7 @@
         <form class="mb-3">
             <div class="form-group row">
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" type="search" id="grocery" placeholder="Pesquisar..." autofocus (keyup)="query.next($event.target.value)" autocomplete="off">
+                    <input class="form-control" type="search" id="grocery" placeholder="Pesquisar..." autofocus autocomplete="off">
                 </div>
             </div>
         </form>
@@ -51,9 +51,9 @@
             <small class="mutted">Sem mercearias registadas!</small>
         </div>
         
-        <go-paging [totalItems]="totalItems" (pageDataEvent)="updateDate($event)"></go-paging>
+        <!-- <go-paging [totalItems]="totalItems" (pageDataEvent)=""></go-paging> -->
 
     </div>
 </div>
 
-<go-confirmation-dialog [dialogId]="'exampleModalCenter'" (dialogEvent)="removeGrocery($event)" ></go-confirmation-dialog>
+<go-confirmation-dialog [dialogId]="'exampleModalCenter'"></go-confirmation-dialog>

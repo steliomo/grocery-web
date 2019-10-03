@@ -45,7 +45,7 @@ export class ProductUnitListComponent implements OnInit, OnDestroy {
     });
   }
   
-  updateDate(eventValue: any){
+  updateData(eventValue: any){
     this.eventValue = eventValue;
     this.items = this.productUnits.slice(this.eventValue.startPage, this.eventValue.endPage);
   }
