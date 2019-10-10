@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Grocery } from 'src/app/groceries/grocery';
 
 @Injectable({
     providedIn: 'root'
@@ -7,6 +8,7 @@ export class TokenServie {
 
     private AUTH_TOKEN: string = "authToken";
     private FULL_NAME: string = "fullName"
+    private GORCERY: string = "grocery";
 
     setToken(token: string){
         window.localStorage.setItem(this.AUTH_TOKEN, token);
@@ -35,5 +37,23 @@ export class TokenServie {
 
     getFullName():string {
         return window.localStorage.getItem(this.FULL_NAME);
+    }
+
+    setGrocery(grocery: Grocery){
+        window.localStorage.setItem(this.GORCERY, grocery.id+"_"+grocery.uuid+"_"+grocery.name);
+    }
+
+    getGrocery():Grocery{
+        
+        const groceryString: string  = window.localStorage.getItem(this.GORCERY);
+        const grocerySplit: string[] = groceryString.split("_");
+       
+        const grocery = {} as Grocery;
+        
+        grocery.id = Number(grocerySplit[0]);
+        grocery.uuid = grocerySplit[1];
+        grocery.name = grocerySplit[2];
+
+        return grocery;
     }
 }

@@ -8,6 +8,8 @@ import { ProductDescriptionService } from 'src/app/products/product-description/
 import { Stock } from '../stock';
 import { StockService } from '../stock.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { TokenServie } from 'src/app/core/auth/token.service';
+import { Grocery } from 'src/app/groceries/grocery';
 
 @Component({
   selector: 'app-stock-form',
@@ -27,7 +29,8 @@ export class StockFormComponent implements OnInit {
                 private productDescriptionService: ProductDescriptionService, 
                 private stockService: StockService, 
                 private alertService: AlertService, 
-                private router: Router
+                private router: Router,
+                private tokenService: TokenServie
               ) { }
 
   ngOnInit() {
@@ -82,6 +85,8 @@ export class StockFormComponent implements OnInit {
     if(this.stockForm.valid && !this.stockForm.pending){
       const stock = this.stockForm.getRawValue() as Stock;
       stock.productDescription = this.productDescription;
+      stock.grocery = this.tokenService.getGrocery();
+      
       this.stockService
           .createStockProduct(stock)
           .subscribe(stock => {

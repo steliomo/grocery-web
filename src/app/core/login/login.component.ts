@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           .subscribe(context => {
             this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
             this.tokenService.setFullName(context.fullName);
+            this.tokenService.setGrocery(context["groceryUser"]["grocery"]);
             this.router.navigate(['home']);
           }, error => {
             this.tokenService.removeToken();
