@@ -43,8 +43,6 @@ export class StockFormComponent implements OnInit {
       this.groceries = groceryDTO.groceriesDTO;
     }
 
-    console.log(stock);
-
     this.stockForm = this.formBuilder.group({
       purchasePrice: ['', Validators.required],
       salePrice: ['', Validators.required],
@@ -125,6 +123,9 @@ export class StockFormComponent implements OnInit {
 
   selectGrocery(grocery: GroceryDTO){
     this.grocery = grocery;
+  }
+
+  searchGrocery(query: string){
   }
 
 }
