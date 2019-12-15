@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { ProductDescription } from '../product-description';
 import { ProductDescriptionService } from '../product-description.service';
 import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { ProductDescriptionDTO } from '../product-description-dto';
+import { ProductDescriptionsDTO } from '../product-descriptions-dto';
 
 @Component({
     templateUrl: 'product-description-list.component.html'
@@ -14,16 +15,16 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 export class ProductDescriptionListComponent implements OnInit, OnDestroy{
     
     totalItems: number;
-    items: ProductDescription [];
+    items: ProductDescriptionDTO [];
     query: Subject<string> = new Subject();
     eventValue: any;
     
     constructor(private productDescriptionService: ProductDescriptionService, private route: ActivatedRoute, private confirmationDialogService: ConfirmationDialogService, private alertService: AlertService){}
     
     ngOnInit(): void {
-        const productDescriptionDTO = this.route.snapshot.data.productDescriptionDTO;
-        this.items = productDescriptionDTO.productDescriptions;
-        this.totalItems = productDescriptionDTO.totalItems;
+        const productDescriptionsDTO: ProductDescriptionsDTO = this.route.snapshot.data.productDescriptionDTO;
+        this.items = productDescriptionsDTO.productDescriptionsDTO;
+        this.totalItems = productDescriptionsDTO.totalItems;
 
         this.query
             .pipe(debounceTime(300))
@@ -49,8 +50,8 @@ export class ProductDescriptionListComponent implements OnInit, OnDestroy{
         this.eventValue = eventValue
         this.productDescriptionService
             .fetchdAllProductDescriptions(eventValue.currentPage - 1, eventValue.pageSize)
-            .subscribe(productDescriptionDTO => {
-                this.items = productDescriptionDTO.productDescriptions;
+            .subscribe(productDescriptionsDTO => {
+                this.items = productDescriptionsDTO.productDescriptionsDTO;
             });
     }
     
@@ -58,19 +59,19 @@ export class ProductDescriptionListComponent implements OnInit, OnDestroy{
        this.query.unsubscribe();
     }
 
-    selectedProductDescription(productDescription: ProductDescription){
-        this.confirmationDialogService.setDialog('Tem a certeza de que pretente remover o detalhe do product "'+productDescription.product.name+' '+productDescription.description+' '+ productDescription.productUnit.unit+ ''+productDescription.productUnit.productUnitType+'"', productDescription);
+    selectedProductDescription(productDescription: ProductDescriptionDTO){
+        this.confirmationDialogService.setDialog('Tem a certeza de que pretente remover o detalhe do product "'+productDescription.name+'"', productDescription);
     }
 
-    removeProductDescription(productDescription: ProductDescription){
+    removeProductDescription(productDescription: ProductDescriptionDTO){
         this.productDescriptionService
             .removeProductDescription(productDescription.uuid)
             .subscribe( productDescription => {
-                this.alertService.success('O detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+ productDescription.productUnit.unit+ ''+productDescription.productUnit.productUnitType+'" foi removido com sucesso!');
+                this.alertService.success('O detalhe do producto "'+productDescription.name+'" foi removido com sucesso!');
                 this.productDescriptionService
                     .fetchdAllProductDescriptions(this.eventValue.currentPage - 1, this.eventValue.pageSize)
-                    .subscribe(productDescriptionDTO => {
-                        this.items = productDescriptionDTO.productDescriptions;
+                    .subscribe(productDescriptionsDTO => {
+                        this.items = productDescriptionsDTO.productDescriptionsDTO;
                     });
             },
             error => {

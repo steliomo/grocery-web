@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Grocery } from 'src/app/groceries/grocery';
+import { GroceryDTO } from 'src/app/groceries/grocery-dto';
 
 @Injectable({
     providedIn: 'root'
@@ -39,16 +39,16 @@ export class TokenServie {
         return window.localStorage.getItem(this.FULL_NAME);
     }
 
-    setGrocery(grocery: Grocery){
-        window.localStorage.setItem(this.GORCERY, grocery.id+"_"+grocery.uuid+"_"+grocery.name);
+    setGrocery(groceryDTO: GroceryDTO){
+        window.localStorage.setItem(this.GORCERY, groceryDTO.id+"_"+groceryDTO.uuid+"_"+groceryDTO.name);
     }
 
-    getGrocery():Grocery{
+    getGrocery():GroceryDTO{
         
         const groceryString: string  = window.localStorage.getItem(this.GORCERY);
         const grocerySplit: string[] = groceryString.split("_");
        
-        const grocery = {} as Grocery;
+        const grocery = {} as GroceryDTO;
         
         grocery.id = Number(grocerySplit[0]);
         grocery.uuid = grocerySplit[1];

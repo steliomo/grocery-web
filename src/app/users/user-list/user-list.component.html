@@ -34,14 +34,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let groceryUser of groceryUsers">
-              <td>{{groceryUser.fullName}}</td>
-              <td>{{groceryUser.username}}</td>
-              <td>{{groceryUser.userRole}}</td>
-              <td>{{groceryUser.grocery.name}}</td>
+            <tr *ngFor="let userDTO of usersDTO">
+              <td>{{userDTO.fullName}}</td>
+              <td>{{userDTO.username}}</td>
+              <td>{{userDTO.groceryUserDTO.userRole}}</td>
+              <td>{{userDTO.groceryUserDTO.groceryDTO.name}}</td>
               <td>
                 <div class="text-right">
-                    <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/groceries/grocery-edit', groceryUser.grocery.uuid]"></button>
+                    <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/groceries/grocery-edit', userDTO.uuid]"></button>
                     <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#exampleModalCenter" (click)="selectedProduct(grocery)"></button>
                 </div>
               </td>

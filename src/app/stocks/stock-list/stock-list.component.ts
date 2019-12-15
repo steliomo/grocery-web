@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ProductDescription } from 'src/app/products/product-description/product-description';
-import { Stock } from '../stock';
-import { StockService } from '../stock.service';
-import { ActivatedRoute } from '@angular/router';
-import { StockDTO } from '../stock-dto';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { query } from '@angular/core/src/render3';
+import { debounceTime } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+
+import { StockService } from '../stock.service';
 import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { StocksDTO } from '../stocks-dto';
+import { StockDTO } from '../stock-dto';
+import { ProductDescriptionDTO } from 'src/app/products/product-description/product-description-dto';
 
 @Component({
   selector: 'app-stock-list',
@@ -18,7 +18,7 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 })
 export class StockListComponent implements OnInit {
 
-  stocks: Stock[] = [];
+  stocks: StockDTO[] = [];
   totalItems: number = 0;
   query: Subject<string> = new Subject();
   eventValue: any;
@@ -26,9 +26,9 @@ export class StockListComponent implements OnInit {
   constructor(private stockService: StockService, private route: ActivatedRoute, private confirmationDialogService: ConfirmationDialogService, private alertService: AlertService) { }
 
   ngOnInit() {
-    const stockDTO: StockDTO = this.route.snapshot.data.stockDTO;
-    this.stocks = stockDTO.stocks;
-    this.totalItems = stockDTO.totalItems;
+    const stocksDTO: StocksDTO = this.route.snapshot.data.stockDTO;
+    this.stocks = stocksDTO.stocksDTO;
+    this.totalItems = stocksDTO.totalItems;
 
     this.query
         .pipe(debounceTime(500))
@@ -44,14 +44,10 @@ export class StockListComponent implements OnInit {
                   this.totalItems = stocks.length;
                 });
           }else{
-            this.stocks = stockDTO.stocks;
-            this.totalItems = stockDTO.totalItems;
+            this.stocks = stocksDTO.stocksDTO;
+            this.totalItems = stocksDTO.totalItems;
           }
         });
-  }
-
-  getProductName(productDescription: ProductDescription): string{
-    return productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+''+productDescription.productUnit.productUnitType;
   }
 
   updateDate(eventValue: any){
@@ -59,25 +55,25 @@ export class StockListComponent implements OnInit {
     this.eventValue = eventValue;
     this.stockService
         .fetchAllStocks(this.eventValue.currentPage - 1, this.eventValue.pageSize)
-        .subscribe(stockDTO => {
-          this.stocks = stockDTO.stocks;
-          this.totalItems = stockDTO.totalItems;
+        .subscribe(stocksDTO => {
+          this.stocks = stocksDTO.stocksDTO;
+          this.totalItems = stocksDTO.totalItems;
         })
   }
 
-  selectedStock(stock: Stock){
-    this.confirmationDialogService.setDialog('Tem a certeza de que pretende remover o stock do produto "'+this.getProductName(stock.productDescription)+'"', stock);
+  selectedStock(stock: StockDTO){
+    this.confirmationDialogService.setDialog('Tem a certeza de que pretende remover o stock do produto "'+stock.productDescriptionDTO.name+'"', stock);
   }
 
-  removeStock(stock: Stock){
+  removeStock(stock: StockDTO){
     this.stockService
         .removeStock(stock.uuid)
         .subscribe(stock => {
-          this.alertService.success('O producto do com o stock "'+ this.getProductName(stock.productDescription)+ '" foi removido com sucesso!');
+          this.alertService.success('O producto do com o stock "'+ stock.productDescriptionDTO.name+'" foi removido com sucesso!');
           this.stockService
               .fetchAllStocks(this.eventValue.currentPage - 1, this.eventValue.pageSize)
               .subscribe(stockDTO => {
-                this.stocks = stockDTO.stocks;
+                this.stocks = stockDTO.stocksDTO;
                 this.totalItems = stockDTO.totalItems;
               });
         },

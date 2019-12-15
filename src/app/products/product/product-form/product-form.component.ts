@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Product } from '../product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductService } from '../product-service';
 import { ProductNameValidatorService } from '../product-name-validator-service';
+import { ProductDTO } from '../product-dto';
 
 @Component({
     selector: 'go-product-form',
@@ -14,9 +14,9 @@ import { ProductNameValidatorService } from '../product-name-validator-service';
 })
 export class ProductFormComponent implements OnInit{
     
-    products: Product[] = [];
+    products: ProductDTO[] = [];
     productForm: FormGroup;
-    product: Product;
+    product: ProductDTO;
     
     constructor(private activeRoute: ActivatedRoute, 
         private formBuilder: FormBuilder, 
@@ -46,7 +46,7 @@ export class ProductFormComponent implements OnInit{
         
         saveProduct(){
             if(this.productForm.valid && !this.productForm.pending){
-                const product = this.productForm.getRawValue() as Product;
+                const product = this.productForm.getRawValue() as ProductDTO;
                 this.productService
                 .createteProduct(product)
                 .subscribe(productCreated => {
@@ -61,7 +61,7 @@ export class ProductFormComponent implements OnInit{
 
         updateProduct(){
             if(this.productForm.valid && !this.productForm.pending){
-                const product = this.productForm.getRawValue() as Product;
+                const product = this.productForm.getRawValue() as ProductDTO;
                 this.product.name = product.name;
                 
                 this.productService

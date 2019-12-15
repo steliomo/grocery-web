@@ -27,9 +27,9 @@
           </div>
       
           <div class="form-group row">
-            <label for="grocery" class="col-form-label col-md-2 text-right font-weight-bold">Mercearia:</label>
+            <label for="groceryDTO" class="col-form-label col-md-2 text-right font-weight-bold">Mercearia:</label>
             <div class="col-md-6 mb-3">    
-                <go-search [items]="groceries" [selectedItem]="grocery" (searchEvent)="searchGrocery($event)" (selectionEvent)="selectGrocery($event)"></go-search>
+                <go-search [items]="groceries" [selectedItem]="groceryDTO" (searchEvent)="searchGrocery($event)" (selectionEvent)="selectGrocery($event)"></go-search>
             </div>
           </div>
 
@@ -63,17 +63,17 @@
                </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row" formGroupName="groceryUserDTO">
             <label for="userRole" class="col-form-label col-md-2 text-right font-weight-bold">Função:</label>
             <div class="col-md-4 mb-3">
               <select formControlName="userRole" class="form-control">
                 <option *ngFor="let userRole of userRoles" [value]="userRole">{{userRole}}</option>
               </select>
-              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('userRole').errors?.required && (form.submitted || userForm.get('userRole').touched)"></go-input-message>
+              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('groceryUserDTO.userRole').errors?.required && (form.submitted || userForm.get('groceryUserDTO.userRole').touched)"></go-input-message>
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row" formGroupName="groceryUserDTO">
             <label for="expiryDate" class="col-form-label col-md-2 text-right font-weight-bold">Data de Validade:</label>
             <div class="col-md-4 mb-3">
               <div class="input-group">
@@ -84,7 +84,7 @@
                 <input formControlName="expiryDate" type="date" class="form-control" id="expiryDate" value="2017-06-01" autocomplete="off">
                     
               </div> 
-              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('expiryDate').errors?.required && (form.submitted || userForm.get('expiryDate').touched)"></go-input-message>
+              <go-input-message message="*Campo obrigatório!" *ngIf="userForm.get('groceryUserDTO.expiryDate').errors?.required && (form.submitted || userForm.get('groceryUserDTO.expiryDate').touched)"></go-input-message>
              </div>
           </div>
 
@@ -107,10 +107,10 @@
       </div>
 
       <div class="card-footer d-flex">
-          <div class="p-1" *ngIf="!groceryUserDTO">
+          <div class="p-1" *ngIf="!userDTO">
               <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
           </div>
-          <div class="p-1" *ngIf="groceryUserDTO">
+          <div class="p-1" *ngIf="userDTO">
               <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateStock()"> Actualizar</button>
           </div>
           <div class="p-1">

@@ -34,9 +34,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let productDescription of items">
-                <td>{{ productDescription.product.name }}</td>
+                <td>{{ productDescription.productDTO.name }}</td>
                 <td>{{ productDescription.description}}</td>
-                <td>{{ productDescription.productUnit.unit }}{{ productDescription.productUnit.productUnitType }}</td>
+                <td>{{ productDescription.productUnitDTO.name }}</td>
                 <td>
                   <div class="text-right">
                       <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/products/product-description-edit', productDescription.uuid]"></button>

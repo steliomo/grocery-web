@@ -17,6 +17,13 @@
   <form #form="ngForm" [formGroup]="stockForm" (submit)="saveStock()">
       
       <div class="card-body">
+          
+          <div class="form-group row">
+            <label for="grocery" class="col-form-label col-md-2 text-right font-weight-bold">Mercearia:</label>
+            <div class="col-md-6 mb-3">    
+                <go-search [items]="groceries" [selectedItem]="grocery" (searchEvent)="searchGrocery($event)" (selectionEvent)="selectGrocery($event)"></go-search>
+            </div>
+          </div>
 
           <div class="form-group row">
               <label for="productDescription" class="col-form-label col-md-2 text-right font-weight-bold">Produto:</label>

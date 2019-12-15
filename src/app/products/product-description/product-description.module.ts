@@ -5,8 +5,6 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } 
 
 import { ProductDescriptionFormComponent } from './product-description-form/product-description-form.component';
 import { AlertModule } from 'src/app/shared/components/alert/alert.module';
-import { Product } from '../product/product';
-import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductDescriptionListComponent } from './product-description-list/product-description-list.component';
 import { SearchModule } from 'src/app/shared/components/search/search.module';
 import { InputMessageModule } from 'src/app/shared/components/input-message/input-message.module';

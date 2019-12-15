@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDescription } from 'src/app/products/product-description/product-description';
+
 import { ProductDescriptionDTO } from 'src/app/products/product-description/product-description-dto';
-import { Subject } from 'rxjs';
 import { ProductDescriptionService } from 'src/app/products/product-description/product-description.service';
-import { Stock } from '../stock';
 import { StockService } from '../stock.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { TokenServie } from 'src/app/core/auth/token.service';
-import { Grocery } from 'src/app/groceries/grocery';
+import { StockDTO } from '../stock-dto';
+import { ProductDescriptionsDTO } from 'src/app/products/product-description/product-descriptions-dto';
+import { GroceryDTO } from 'src/app/groceries/grocery-dto';
 
 @Component({
   selector: 'app-stock-form',
@@ -19,10 +19,11 @@ import { Grocery } from 'src/app/groceries/grocery';
 export class StockFormComponent implements OnInit {
 
   stockForm: FormGroup;
-  productDescriptions: ProductDescription[] = [];
-  productDescription: ProductDescription;
-  stock: Stock;
-
+  productDescriptions: ProductDescriptionDTO[] = [];
+  productDescription: ProductDescriptionDTO;
+  stock: StockDTO;
+  groceries: GroceryDTO[] = [];
+  grocery: GroceryDTO;
 
   constructor(  private formBuilder: FormBuilder, 
                 private route: ActivatedRoute, 
@@ -36,6 +37,13 @@ export class StockFormComponent implements OnInit {
   ngOnInit() {
     this.productDescriptions = this.getProducts();
     const stock = this.route.snapshot.data.stock;
+    const groceryDTO = this.route.snapshot.data.groceryDTO;
+
+    if(groceryDTO){
+      this.groceries = groceryDTO.groceriesDTO;
+    }
+
+    console.log(stock);
 
     this.stockForm = this.formBuilder.group({
       purchasePrice: ['', Validators.required],
@@ -45,26 +53,21 @@ export class StockFormComponent implements OnInit {
 
     if(stock){
       this.stock = stock;
-      this.productDescription = this.stock.productDescription;
-      this.productDescription.name = this.getProductName(this.productDescription);
+      this.grocery = stock.groceryDTO;
+      this.productDescription = this.stock.productDescriptionDTO;
       this.stockForm.patchValue(this.stock);
     }
   }
 
-  private getProductName(productDescription: ProductDescription): string{
-    return productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+''+productDescription.productUnit.productUnitType;
-  }
-
-  private getProducts(): ProductDescription[] {
-    const productDescriptionDTO: ProductDescriptionDTO = this.route.snapshot.data.productDescriptionDTO;
-    const productDescriptions: ProductDescription[] = productDescriptionDTO.productDescriptions;
-    productDescriptions.forEach(productDescription => productDescription.name = this.getProductName(productDescription));
+  private getProducts(): ProductDescriptionDTO[] {
+    const productDescriptionsDTO: ProductDescriptionsDTO = this.route.snapshot.data.productDescriptionDTO;
+    const productDescriptions: ProductDescriptionDTO[] = productDescriptionsDTO.productDescriptionsDTO;
     
     return productDescriptions;
   }
 
 
-  selectProduct(productDescription: ProductDescription){
+  selectProduct(productDescription: ProductDescriptionDTO){
     this.productDescription = productDescription;
   }
 
@@ -74,7 +77,6 @@ export class StockFormComponent implements OnInit {
           .fetchProductDescriptionByDescription(query)
           .subscribe(productDescriptions => {
             this.productDescriptions = productDescriptions;
-            this.productDescriptions.forEach(productDescription => productDescription.name = this.getProductName(productDescription));
           });
     }else{
       this.productDescriptions = this.getProducts();
@@ -83,14 +85,14 @@ export class StockFormComponent implements OnInit {
 
   saveStock(){
     if(this.stockForm.valid && !this.stockForm.pending){
-      const stock = this.stockForm.getRawValue() as Stock;
-      stock.productDescription = this.productDescription;
-      stock.grocery = this.tokenService.getGrocery();
+      const stock = this.stockForm.getRawValue() as StockDTO;
+      stock.groceryDTO = this.grocery;
+      stock.productDescriptionDTO = this.productDescription;
       
       this.stockService
           .createStockProduct(stock)
           .subscribe(stock => {
-            this.alertService.success('O stock do produto "'+this.getProductName(stock.productDescription)+'" foi adicionado com sucesso!');
+            this.alertService.success('O stock do produto "'+stock.productDescriptionDTO.name+'" foi adicionado com sucesso!');
             this.router.navigate(['/stocks']);
           },
           error => {
@@ -101,17 +103,18 @@ export class StockFormComponent implements OnInit {
 
   updateStock(){
     if(this.stockForm.valid && !this.stockForm.pending){
-      const stock = this.stockForm.getRawValue() as Stock;
+      const stock = this.stockForm.getRawValue() as StockDTO;
 
-      this.stock.productDescription = this.productDescription;
+      this.stock.groceryDTO = this.grocery;
+      this.stock.productDescriptionDTO = this.productDescription;
       this.stock.purchasePrice = stock.purchasePrice;
       this.stock.salePrice = stock.salePrice;
       this.stock.quantity = stock.quantity;
-      
+
       this.stockService
           .updateStock(this.stock)
           .subscribe(stock => {
-            this.alertService.success('O stock do produto "'+this.getProductName(stock.productDescription)+'" foi actualizado com sucesso!');
+            this.alertService.success('O stock do produto "'+stock.productDescriptionDTO.name+'" foi actualizado com sucesso!');
             this.router.navigate(['/stocks']);
           },
           error => {
@@ -119,4 +122,9 @@ export class StockFormComponent implements OnInit {
           });
     }
   }
+
+  selectGrocery(grocery: GroceryDTO){
+    this.grocery = grocery;
+  }
+
 }

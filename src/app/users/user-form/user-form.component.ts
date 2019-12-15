@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Grocery } from 'src/app/groceries/grocery';
 import { GroceryDTO } from 'src/app/groceries/grocery-dto';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
-import { GroceryUserDTO } from '../grocery-user-dto';
 import { UserService } from '../user-service';
+import { GroceriesDTO } from 'src/app/groceries/groceries-dto';
+import { UserDTO } from '../user-dto';
 
 @Component({
   selector: 'app-user-form',
@@ -16,10 +16,10 @@ import { UserService } from '../user-service';
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
-  groceries: Grocery[] = [];
+  groceries: GroceryDTO[] = [];
   userRoles: string[] = [];
-  groceryUserDTO: GroceryUserDTO;
-  grocery: Grocery;
+  groceryDTO: GroceryDTO;
+  userDTO: UserDTO;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private alertService: AlertService, private userService: UserService, private router: Router) { }
 
@@ -29,32 +29,36 @@ export class UserFormComponent implements OnInit {
       fullName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      userRole: ['', Validators.required],
-      expiryDate: ['', Validators.required],
+      groceryUserDTO: this.formBuilder.group({
+        userRole: ['', Validators.required],
+        expiryDate: ['', Validators.required],
+        groceryDTO: [{}, Validators.required]
+      }),
       email: ['']
     });
 
-    const groceryDTO:GroceryDTO = this.route.snapshot.data.groceryDTO;
-    this.groceries = groceryDTO.groceries;
-
+    const groceriesDTO: GroceriesDTO = this.route.snapshot.data.groceryDTO;
+    this.groceries = groceriesDTO.groceriesDTO;
+    
     this.userRoles = this.route.snapshot.data.userRoles;
   }
 
 
   saveUser(){
+
     if(this.userForm.valid && !this.userForm.pending){
-      
-      if(!this.grocery){
+
+      if(!this.groceryDTO){
         this.alertService.danger("A mercearia deve ser seleccionada!");
         return;
       }
       
-      const groceryUserDTO: GroceryUserDTO = this.userForm.getRawValue() as GroceryUserDTO;
-      groceryUserDTO.grocery = this.grocery;
-      
-      this.userService.createGroceryUser(groceryUserDTO)
-                      .subscribe(groceryUserDTO => {
-                        this.alertService.success('O (A) utilizador(a) '+groceryUserDTO.fullName+ ' foi registado(a) com sucesso!');
+      this.userDTO = this.userForm.getRawValue() as UserDTO;
+      this.userDTO.groceryUserDTO.groceryDTO = this.groceryDTO;
+
+      this.userService.createGroceryUser(this.userDTO)
+                      .subscribe(userDTO => {
+                        this.alertService.success('O (A) utilizador(a) '+userDTO.fullName+ ' foi registado(a) com sucesso!');
                         this.router.navigate(['users']);
                       }, 
                       error => {
@@ -64,12 +68,11 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  selectGrocery(grocery: Grocery){
-    this.grocery = grocery;
+  selectGrocery(groceryDTO: GroceryDTO){
+    this.groceryDTO = groceryDTO;
   }
 
   searchGrocery(query: string){
 
   }
-
 }

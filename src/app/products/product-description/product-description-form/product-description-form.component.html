@@ -21,7 +21,7 @@
                 <div class="form-group row">
                     <label for="product" class="col-form-label col-md-2 text-right font-weight-bold">Producto:</label>
                     <div class="col-md-6 mb-3">    
-                        <go-search [items]="products" [selectedItem]="productDescription.product" (searchEvent)="searchProduct($event)" (selectionEvent)="selectedProduct($event)"></go-search>
+                        <go-search [items]="products" [selectedItem]="productDescription.productDTO" (searchEvent)="searchProduct($event)" (selectionEvent)="selectedProduct($event)"></go-search>
                     </div>
                     <div class="p-1">
                         <a class="btn btn-success fa fa-plus-square" [routerLink]="['/products/product-create']"></a>
@@ -39,7 +39,7 @@
                 <div class="form-group row">
                     <label for="productSize" class="col-form-label col-md-2 text-right font-weight-bold">Unidade:</label>
                     <div class="col-md-6 mb-3">    
-                        <go-search [items]="productUnits" [selectedItem]="productDescription.productUnit" (searchEvent)="searchProductUnit($event)" (selectionEvent)="selectProductUnit($event)"></go-search>
+                        <go-search [items]="productUnits" [selectedItem]="productDescription.productUnitDTO" (searchEvent)="searchProductUnit($event)" (selectionEvent)="selectProductUnit($event)"></go-search>
                     </div>
 
                     <div class="p-1">

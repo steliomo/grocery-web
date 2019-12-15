@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Product } from '../../product/product';
+import { ProductDTO } from '../../product/product-dto';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
-import { ProductUnit } from '../../product-unit/product-unit';
-import { ProductDescription } from '../product-description';
+import { ProductUnitDTO } from '../../product-unit/product-unit-dto';
 import { ProductDescriptionService } from '../product-description.service';
+import { ProductDescriptionDTO } from '../product-description-dto';
 
 @Component({
   selector: 'app-product-description-form',
@@ -15,17 +15,16 @@ import { ProductDescriptionService } from '../product-description.service';
 })
 export class ProductDescriptionFormComponent implements OnInit{
     
-    products: Product[] = [];
-    productUnits: ProductUnit[] = [];
+    products: ProductDTO[] = [];
+    productUnits: ProductUnitDTO[] = [];
     productDescriptionForm: FormGroup;
-    productDescription: ProductDescription;
+    productDescription: ProductDescriptionDTO;
     
     constructor(private route: ActivatedRoute, private router: Router  ,private formBuilder: FormBuilder, private alertService: AlertService, private productDescriptionService: ProductDescriptionService) {}
     
     ngOnInit() { 
         this.products = this.route.snapshot.data.products;
         this.productUnits = this.route.snapshot.data.productUnits;
-        this.productUnits.forEach(productUnit => productUnit.name = productUnit.unit+' '+productUnit.productUnitType);
 
         this.productDescription = this.route.snapshot.data.productDescription;
 
@@ -34,10 +33,9 @@ export class ProductDescriptionFormComponent implements OnInit{
         });
 
         if(this.productDescription){
-            this.productDescription.productUnit.name = this.productDescription.productUnit.unit+''+this.productDescription.productUnit.productUnitType;
             this.productDescriptionForm.patchValue(this.productDescription);
         }else{
-            this.productDescription = this.productDescriptionForm.getRawValue() as ProductDescription;
+            this.productDescription = this.productDescriptionForm.getRawValue() as ProductDescriptionDTO;
         }
     }
 
@@ -54,28 +52,27 @@ export class ProductDescriptionFormComponent implements OnInit{
             this.productUnits = this.productUnits.filter(productUnit => productUnit.unit.toString().includes(query) || productUnit.productUnitType.toLowerCase().includes(query));
         }else{
             this.productUnits = this.route.snapshot.data.productUnits;
-            this.productUnits.forEach(productUnit => productUnit.name = productUnit.unit+' '+productUnit.productUnitType);
         }
     }
 
-    selectedProduct(product: Product){
-        this.productDescription.product = product;
+    selectedProduct(product: ProductDTO){
+        this.productDescription.productDTO = product;
     }
 
-    selectProductUnit(productUnit: ProductUnit){
-        this.productDescription.productUnit = productUnit;
+    selectProductUnit(productUnit: ProductUnitDTO){
+        this.productDescription.productUnitDTO = productUnit;
     }
 
     saveProductDescription(){
 
         if(this.productDescriptionForm.valid && !this.productDescriptionForm.pending){
 
-            if(!this.productDescription.product){
+            if(!this.productDescription.productDTO){
                 this.alertService.danger('O campo "Producto" deve ser seleccinado');
                 return;
             }
 
-            if(!this.productDescription.productUnit){
+            if(!this.productDescription.productUnitDTO){
                 this.alertService.danger('O campo "Unidade" deve ser seleccinado');
                 return;
             }
@@ -87,7 +84,7 @@ export class ProductDescriptionFormComponent implements OnInit{
                 .createProductDescription(this.productDescription)
                 .subscribe(productDescription => {
                     this.router.navigate(['/products']);
-                    this.alertService.success('O Detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+ ' '+productDescription.productUnit.productUnitType+'" foi criado com sucesso!')
+                    this.alertService.success('O Detalhe do producto "'+productDescription.name+'" foi criado com sucesso!')
                 }, 
                 error => {
                     this.alertService.danger('Ocorreu um erro ao criar o detalhe do producto!');
@@ -107,7 +104,7 @@ export class ProductDescriptionFormComponent implements OnInit{
                 .upadateProductDescription(this.productDescription)
                 .subscribe(productDescription => {
                     this.router.navigate(['/products']);
-                    this.alertService.success('O Detalhe do producto "'+productDescription.product.name+' '+productDescription.description+' '+productDescription.productUnit.unit+ ' '+productDescription.productUnit.productUnitType+'" foi actualizado com sucesso!')
+                    this.alertService.success('O Detalhe do producto "'+productDescription.productDTO.name+' '+productDescription.description+' '+productDescription.productUnitDTO.unit+ ' '+productDescription.productUnitDTO.productUnitType+'" foi actualizado com sucesso!')
                 }, 
                 error => {
                     this.alertService.danger('Ocorreu um erro ao actualizar o detalhe do producto!');

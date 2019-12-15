@@ -35,7 +35,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let stock of stocks">
-                <td>{{ getProductName(stock.productDescription)}}</td>
+                <td>{{ stock.productDescriptionDTO.name }}</td>
                 <td>{{ stock.purchasePrice | currency: 'MT ': 'symbol' }}</td>
                 <td>{{ stock.salePrice | currency: 'MT ': 'symbol' }}</td>
                 <td class="text-center">{{ stock.quantity }}</td>

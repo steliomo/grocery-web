@@ -1,12 +1,7 @@
-import { Grocery } from '../groceries/grocery';
+import { GroceryDTO } from '../groceries/grocery-dto';
 
 export interface GroceryUserDTO {
-    fullName: string;
-    grocery: Grocery;
-    username: string;
-    password: string;
+    groceryDTO: GroceryDTO;
     userRole: string;
     expiryDate: Date;
-    email: string;
-    totalItems: number;
 }

@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit {
 
       this.loginService
           .login(user)
-          .subscribe(context => {
+          .subscribe(userDto => {
             this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
-            this.tokenService.setFullName(context.fullName);
-            this.tokenService.setGrocery(context["groceryUser"]["grocery"]);
+            this.tokenService.setFullName(userDto.fullName);
+            this.tokenService.setGrocery(userDto.groceryUserDTO.groceryDTO);
             this.router.navigate(['home']);
           }, error => {
             this.tokenService.removeToken();

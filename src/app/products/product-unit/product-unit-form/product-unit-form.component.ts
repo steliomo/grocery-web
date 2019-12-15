@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProductUnitService } from '../product-unit.service';
-import { ProductUnit } from '../product-unit';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductUnitDTO } from '../product-unit-dto';
 
 @Component({
   selector: 'app-product-unit-form',
@@ -17,7 +17,7 @@ export class ProductUnitFormComponent implements OnInit {
 
   productUnitTypes = [];
 
-  productUnit: ProductUnit;
+  productUnit: ProductUnitDTO;
 
   constructor(private formBuilder: FormBuilder, private productUnitService: ProductUnitService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
@@ -50,7 +50,7 @@ export class ProductUnitFormComponent implements OnInit {
   saveProductUnit(){
     if(this.productUnitForm.valid && !this.productUnitForm.pending){
       
-      const productUnit =  this.productUnitForm.getRawValue() as ProductUnit;
+      const productUnit =  this.productUnitForm.getRawValue() as ProductUnitDTO;
       
       this.productUnitService
           .createProductUnit(productUnit)
@@ -68,7 +68,7 @@ export class ProductUnitFormComponent implements OnInit {
   updateProductUnit(){
     if(this.productUnitForm.valid && !this.productUnitForm.pending){
 
-      const productUnit = this.productUnitForm.getRawValue() as ProductUnit;
+      const productUnit = this.productUnitForm.getRawValue() as ProductUnitDTO;
       this.productUnit.unit = productUnit.unit;
       this.productUnit.productUnitType = productUnit.productUnitType;
 

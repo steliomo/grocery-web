@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Grocery } from '../grocery';
 import { GroceryService } from '../grocery-service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { GroceryDTO } from '../grocery-dto';
 
 @Component({
   selector: 'app-grocery-form',
@@ -14,7 +14,7 @@ import { AlertService } from 'src/app/shared/components/alert/alert.service';
 export class GroceryFormComponent implements OnInit {
 
   groceryForm: FormGroup;
-  grocery: Grocery;
+  grocery: GroceryDTO;
 
   constructor(private formBuilder: FormBuilder, 
               private groceryService: GroceryService, 
@@ -33,7 +33,7 @@ export class GroceryFormComponent implements OnInit {
 
   saveGrocery(){
     if(this.groceryForm.valid && !this.groceryForm.pending){
-     this.grocery =  this.groceryForm.getRawValue() as Grocery;
+     this.grocery =  this.groceryForm.getRawValue() as GroceryDTO;
 
      this.groceryService.createGrocery(this.grocery)
                         .subscribe(grocery =>{

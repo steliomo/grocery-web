@@ -127,7 +127,8 @@ const routes: Routes  = [
                 path: 'stock-create',
                 component: StockFormComponent, 
                 resolve: {
-                    productDescriptionDTO: ProductDescriptionResolver
+                    groceryDTO: GroceryResolver,
+                    productDescriptionDTO: ProductDescriptionResolver,
                 }
             },
 
@@ -135,6 +136,7 @@ const routes: Routes  = [
                 path: 'stock-edit/:stockUuid',
                 component: StockFormComponent,
                 resolve: {
+                    groceryDTO: GroceryResolver,
                     productDescriptionDTO: ProductDescriptionResolver,
                     stock: StockValueResolver
                 }

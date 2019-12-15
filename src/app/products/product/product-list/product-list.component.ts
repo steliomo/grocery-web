@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { Product } from '../product';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ProductService } from '../product-service';
 import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
+import { ProductDTO } from '../product-dto';
 
 @Component({
   selector: 'app-product-list',
@@ -15,9 +15,9 @@ import { ConfirmationDialogService } from 'src/app/shared/components/confirmatio
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   
-  products: Product[] = [];
+  products: ProductDTO[] = [];
   totalItems: number;
-  items: Product[];
+  items: ProductDTO[];
   query: Subject<string> = new Subject();
 
   constructor(private alertService: AlertService, private activeRoute: ActivatedRoute, private productService: ProductService, private confirmationDialogService: ConfirmationDialogService) { }
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.items = this.products.slice(eventValue.startPage, eventValue.endPage);
   }
 
-  selectedProduct(product: Product){
+  selectedProduct(product: ProductDTO){
     this.confirmationDialogService.setDialog("Tem a certeza que pretente revomer o produto '"+product.name+"'?", product);
   }
 

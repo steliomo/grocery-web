@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-import { ProductUnit } from '../product-unit';
+import { ProductUnitDTO } from '../product-unit-dto';
 import { debounceTime } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
@@ -15,9 +15,9 @@ import { ProductUnitService } from '../product-unit.service';
 })
 export class ProductUnitListComponent implements OnInit, OnDestroy {
   
-  productUnits: ProductUnit[] = [];
+  productUnits: ProductUnitDTO[] = [];
   totalItems: number = 0;
-  items: ProductUnit[];
+  items: ProductUnitDTO[];
   query: Subject<string> = new Subject();
   eventValue: any;
   
@@ -50,11 +50,11 @@ export class ProductUnitListComponent implements OnInit, OnDestroy {
     this.items = this.productUnits.slice(this.eventValue.startPage, this.eventValue.endPage);
   }
 
-  selectedProductUnit(productUnit: ProductUnit): void{
-      this.confirmationDialog.setDialog('Tem a certeza de que pretende remover a unidade "'+productUnit.unit+' '+productUnit.productUnitType+'"', productUnit);
+  selectedProductUnit(productUnit: ProductUnitDTO): void{
+      this.confirmationDialog.setDialog('Tem a certeza de que pretende remover a unidade "'+productUnit.name+'"', productUnit);
   }
 
-  removeProductUnit(productUnit: ProductUnit){
+  removeProductUnit(productUnit: ProductUnitDTO){
     this.productUnitService
         .removeProductUnit(productUnit.uuid)
         .subscribe(productUnitRemoved => {

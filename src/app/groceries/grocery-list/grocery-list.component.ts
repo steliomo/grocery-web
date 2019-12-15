@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Grocery } from '../grocery';
 import { ActivatedRoute } from '@angular/router';
 import { GroceryDTO } from '../grocery-dto';
+import { GroceriesDTO } from '../groceries-dto';
 
 @Component({
   selector: 'app-grocery-list',
@@ -10,15 +10,15 @@ import { GroceryDTO } from '../grocery-dto';
 })
 export class GroceryListComponent implements OnInit {
 
-  groceries: Grocery[] = [];
+  groceriesDTO: GroceryDTO[] = [];
   totalItems: number;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const groceryDTO:GroceryDTO = this.route.snapshot.data.groceryDTO;
-    this.groceries = groceryDTO.groceries;
-    this.totalItems = groceryDTO.totalItems;
+    const groceriesDTO: GroceriesDTO = this.route.snapshot.data.groceryDTO;
+    this.groceriesDTO = groceriesDTO.groceriesDTO;
+    this.totalItems = groceriesDTO.totalItems;
   }
 
 }
