@@ -81,6 +81,20 @@
                 <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('quantity').errors?.required && (form.submitted || stockForm.get('quantity').touched)"></go-input-message>
                </div>
           </div>
+
+          <div class="form-group row">
+              <label for="minimumStock" class="col-form-label col-md-2 text-right font-weight-bold">Stock Mínimo:</label>
+              <div class="col-md-4 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-cart-plus"></span></div>
+                  </div>   
+                    
+                  <input formControlName="minimumStock" type="number" class="form-control" id="minimumStock" autocomplete="off" maxlength="2">
+                </div> 
+                <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('minimumStock').errors?.required && (form.submitted || stockForm.get('minimumStock').touched)"></go-input-message>
+               </div>
+          </div>
               
       </div>
 

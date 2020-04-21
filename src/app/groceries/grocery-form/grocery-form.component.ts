@@ -37,7 +37,7 @@ export class GroceryFormComponent implements OnInit {
 
      this.groceryService.createGrocery(this.grocery)
                         .subscribe(grocery =>{
-                          this.alertService.success('O Mercearia com o nome: "'+grocery.name+'" foi criada com sucesso!');
+                          this.alertService.success('A Mercearia com o nome: "'+grocery.name+'" foi criada com sucesso!');
                           this.router.navigate(['groceries'])
                         },
                         error => {

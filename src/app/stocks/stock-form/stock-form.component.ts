@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { TokenServie } from 'src/app/core/auth/token.service';
+import { GroceryDTO } from 'src/app/groceries/grocery-dto';
 import { ProductDescriptionDTO } from 'src/app/products/product-description/product-description-dto';
 import { ProductDescriptionService } from 'src/app/products/product-description/product-description.service';
-import { StockService } from '../stock.service';
-import { AlertService } from 'src/app/shared/components/alert/alert.service';
-import { TokenServie } from 'src/app/core/auth/token.service';
-import { StockDTO } from '../stock-dto';
 import { ProductDescriptionsDTO } from 'src/app/products/product-description/product-descriptions-dto';
-import { GroceryDTO } from 'src/app/groceries/grocery-dto';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { StockDTO } from '../stock-dto';
+import { StockService } from '../stock.service';
+
 
 @Component({
   selector: 'app-stock-form',
@@ -46,7 +46,8 @@ export class StockFormComponent implements OnInit {
     this.stockForm = this.formBuilder.group({
       purchasePrice: ['', Validators.required],
       salePrice: ['', Validators.required],
-      quantity: ['', Validators.required ]
+      quantity: ['', Validators.required ],
+      minimumStock: ['', Validators.required]
     });
 
     if(stock){
@@ -108,6 +109,7 @@ export class StockFormComponent implements OnInit {
       this.stock.purchasePrice = stock.purchasePrice;
       this.stock.salePrice = stock.salePrice;
       this.stock.quantity = stock.quantity;
+      this.stock.minimumStock = stock.minimumStock;
 
       this.stockService
           .updateStock(this.stock)
@@ -117,6 +119,7 @@ export class StockFormComponent implements OnInit {
           },
           error => {
             this.alertService.danger('Ocorreu um erro ao actualizar o stock do producto');
+            console.log(error);
           });
     }
   }

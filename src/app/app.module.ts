@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { StocksModule } from './stocks/stocks.module';
 import { GroceriesModule } from './groceries/groceries.module';
 import { UsersModule } from './users/users.module';
+import { ExpensesModule } from './expenses/expenses.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UsersModule } from './users/users.module';
     HomeModule, 
     StocksModule, 
     GroceriesModule,
-    UsersModule
+    UsersModule, 
+    ExpensesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

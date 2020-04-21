@@ -1,0 +1,56 @@
+<div class="card">
+  
+  <div class="card-header bg-default ">
+      <div class="d-flex">
+          
+          <div class="mr-auto p-2 btn btn-default">
+              <span class="fa fa-money"></span><strong> Tipos de Despesas </strong>
+          </div>
+
+          <div class="p-1">
+              <button class="btn btn-success font-weight-bold fa fa-money" [routerLink]="['/expenses/expenses-type-create']"> Adicionar</button>
+          </div>
+
+      </div>
+  </div>
+
+  <div class="card-body">
+        
+      <form class="mb-3">
+          <div class="form-group row">
+              <div class="col-md-6 mb-3">
+                  <input class="form-control" type="search" id="expenseType" placeholder="Pesquisar..." autofocus autocomplete="off">
+              </div>
+          </div>
+      </form>
+    
+      <table class="table" *ngIf="totalItems > 0">
+          <thead class="thead-dark">
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expenseType of expensesType">
+              <td>{{expenseType.name}}</td>
+              <td>{{expenseType.description}}</td>
+              <td>
+                <div class="text-right">
+                    <button class="btn btn-success mr-1 fa fa-edit" [routerLink]="['/expenses/expenses-type-edit', expenseType.uuid]"></button>
+                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#exampleModalCenter" (click)="selectedProduct(expenseType)"></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+
+      <div class="container text-center" *ngIf="totalItems === 0">
+          <small class="mutted">Sem tipos de despesas registados!</small>
+      </div>
+      
+      <!-- <go-paging [totalItems]="totalItems" (pageDataEvent)=""></go-paging> -->
+
+  </div>
+
+</div>
