@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private tokenService: TokenServie, private alertService: AlertService, private router: Router) { }
@@ -24,22 +24,18 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login(){
-    if(this.loginForm.valid && !this.loginForm.pending){
+  login() {
+    if (this.loginForm.valid && !this.loginForm.pending) {
       const user: User = this.loginForm.getRawValue() as User;
 
       this.loginService
-          .login(user)
-          .subscribe(userDto => {
-            this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
-            this.tokenService.setFullName(userDto.fullName);
-            this.tokenService.setGrocery(userDto.groceryUserDTO.groceryDTO);
-            this.router.navigate(['home']);
-          }, error => {
-            this.tokenService.removeToken();
-            this.alertService.danger('Ocorreu um erro ao logar....');
-            console.log(error);
-          })
+        .login(user)
+        .subscribe(userDto => {
+          this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
+          this.tokenService.setFullName(userDto.fullName);
+          this.tokenService.setGrocery(userDto.groceryUserDTO.groceryDTO);
+          this.router.navigate(['home']);
+        });
     }
   }
 

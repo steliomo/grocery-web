@@ -8,4 +8,5 @@ export interface StockDTO extends GenericDTO {
     purchasePrice: number;
     salePrice: number;
     quantity:number;
+    minimumStock: number;
 }

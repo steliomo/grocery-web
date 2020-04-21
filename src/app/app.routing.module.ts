@@ -1,36 +1,40 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule}  from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/auth/auth.guard';
+import { LoginGuard } from './core/auth/login.guard';
+import { LoginComponent } from './core/login/login.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ExpenseTypeListComponent } from './expenses/expense-type/expense-type-list/expense-type-list.component';
+import { ExpensesComponent } from './expenses/expenses.component';
+import { GroceriesComponent } from './groceries/groceries.component';
+import { GroceryFormComponent } from './groceries/grocery-form/grocery-form.component';
+import { GroceryListComponent } from './groceries/grocery-list/grocery-list.component';
+import { GroceryResolver } from './groceries/grocery.resolver';
+import { HomeComponent } from './home/home.component';
+import { ProductDescriptionFormComponent } from './products/product-description/product-description-form/product-description-form.component';
+import { ProductDescriptionListComponent } from './products/product-description/product-description-list/product-description-list.component';
+import { ProductDescriptionValueResolver } from './products/product-description/product-description-value.resolver';
+import { ProductDescriptionResolver } from './products/product-description/product-description.resolver';
+import { ProductUnitResolver } from './products/product-description/product-unit.resolver';
+import { ProductResolver } from './products/product-description/product.resolver';
+import { ProductUnitFormComponent } from './products/product-unit/product-unit-form/product-unit-form.component';
+import { ProductUnitListComponent } from './products/product-unit/product-unit-list/product-unit-list.component';
 import { ProductFormComponent } from './products/product/product-form/product-form.component';
 import { ProductListComponent } from './products/product/product-list/product-list.component';
 import { ProductsComponent } from './products/products.component';
-import { ProductDescriptionFormComponent } from './products/product-description/product-description-form/product-description-form.component';
-import { ProductResolver } from './products/product-description/product.resolver';
-import { ProductDescriptionListComponent } from './products/product-description/product-description-list/product-description-list.component';
-import { ProductUnitFormComponent } from './products/product-unit/product-unit-form/product-unit-form.component';
-import { ProductUnitResolver } from './products/product-description/product-unit.resolver';
-import { ProductUnitListComponent } from './products/product-unit/product-unit-list/product-unit-list.component';
-import { HomeComponent } from './home/home.component';
-import { ProductDescriptionResolver } from './products/product-description/product-description.resolver';
-import { ProductDescriptionValueResolver } from './products/product-description/product-description-value.resolver';
-import { StocksComponent } from './stocks/stocks.component';
 import { StockFormComponent } from './stocks/stock-form/stock-form.component';
 import { StockListComponent } from './stocks/stock-list/stock-list.component';
-import { StockResolver } from './stocks/stock.resolver';
 import { StockValueResolver } from './stocks/stock-value.resolver';
-import { LoginComponent } from './core/login/login.component';
-import { LoginGuard } from './core/auth/login.guard';
-import { AuthGuard } from './core/auth/auth.guard';
-import { GroceriesComponent } from './groceries/groceries.component';
-import { GroceryListComponent } from './groceries/grocery-list/grocery-list.component';
-import { GroceryFormComponent } from './groceries/grocery-form/grocery-form.component';
-import { GroceryResolver } from './groceries/grocery.resolver';
-import { UsersComponent } from './users/users.component';
-import { UserListComponent } from './users/user-list/user-list.component';
-import { UserFormComponent } from './users/user-form/user-form.component';
-import { UserRoleResolver } from './users/user-role.resolver';
+import { StockResolver } from './stocks/stock.resolver';
+import { StocksComponent } from './stocks/stocks.component';
 import { GroceryUserResolver } from './users/grocery-user.resolver';
+import { UserFormComponent } from './users/user-form/user-form.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserRoleResolver } from './users/user-role.resolver';
+import { UsersComponent } from './users/users.component';
+import { ExpenseTypeResolver } from './expenses/expense-type/expense-type.resolver';
+import { ExpenseTypeFormComponent } from './expenses/expense-type/expense-type-form/expense-type-form.component';
+
 
 const routes: Routes  = [
     {
@@ -182,6 +186,31 @@ const routes: Routes  = [
                     groceryDTO: GroceryResolver,
                     userRoles: UserRoleResolver
                 }
+            }
+        ]
+    },
+    
+    {
+        path: 'expenses',
+        component: ExpensesComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                component: ExpenseTypeListComponent,
+                resolve: {
+                    expensesDTO: ExpenseTypeResolver
+                }
+            },
+
+            {
+                path: 'expenses-type-create',
+                component: ExpenseTypeFormComponent
+            },
+
+            {
+                path: 'expenses-type-edit/:expenseTypeUuid',
+                component: ExpenseTypeFormComponent
             }
         ]
     },
