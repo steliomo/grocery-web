@@ -1,16 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app.routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing.module';
 import { CoreModule } from './core/core.module';
-import { ProductsModule } from './products/products.module';
 import { ErrorsModule } from './errors/errors.module';
+import { GroceriesModule } from './groceries/groceries.module';
 import { HomeModule } from './home/home.module';
 import { StocksModule } from './stocks/stocks.module';
-import { GroceriesModule } from './groceries/groceries.module';
 import { UsersModule } from './users/users.module';
-import { ExpensesModule } from './expenses/expenses.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +18,12 @@ import { ExpensesModule } from './expenses/expenses.module';
   imports: [
     BrowserModule,
     CoreModule,
+    HttpClientModule,
     AppRoutingModule,
     ErrorsModule,
-    ProductsModule, 
-    HomeModule, 
-    StocksModule, 
+    HomeModule,
     GroceriesModule,
-    UsersModule, 
-    ExpensesModule
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
