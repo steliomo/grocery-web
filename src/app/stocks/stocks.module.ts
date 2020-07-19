@@ -1,34 +1,35 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-import { StocksComponent } from './stocks.component';
 import { CoreModule } from '../core/core.module';
 import { AlertModule } from '../shared/components/alert/alert.module';
-import { StockFormComponent } from './stock-form/stock-form.component';
-import { InputMessageModule } from '../shared/components/input-message/input-message.module';
-import { SearchModule } from '../shared/components/search/search.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { StockListComponent } from './stock-list/stock-list.component';
-import { PagingModule } from '../shared/components/paging/paging.module';
 import { ConfirmationDialogModule } from '../shared/components/confirmation-dialog/confirmation-dialog.module';
+import { InputMessageModule } from '../shared/components/input-message/input-message.module';
+import { PagingModule } from '../shared/components/paging/paging.module';
+import { SearchModule } from '../shared/components/search/search.module';
+import { StockFormComponent } from './stock-form/stock-form.component';
+import { StockListComponent } from './stock-list/stock-list.component';
+import { StocksComponent } from './stocks.component';
+import { StocksRoutingModule } from './stocks.routing.module';
+
 
 @NgModule({
-  
-  declarations: [ StocksComponent, StockFormComponent, StockListComponent ],
+
+  declarations: [StocksComponent, StockFormComponent, StockListComponent],
 
   imports: [
-    CommonModule, 
+    CommonModule,
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    
-    CoreModule, 
-    AlertModule, 
-    InputMessageModule, 
-    SearchModule, 
-    PagingModule, 
-    ConfirmationDialogModule
+    CoreModule,
+    AlertModule,
+    InputMessageModule,
+    SearchModule,
+    PagingModule,
+    ConfirmationDialogModule,
+    StocksRoutingModule
   ]
 })
 export class StocksModule { }

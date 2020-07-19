@@ -2,15 +2,15 @@
  
   <ul class="pagination justify-content-end">
 
-    <li class="page-item" [ngClass]="{disabled:currentPage === MIN_PAGING}">
+    <li class="page-item" [class.disabled]="currentPage === MIN_PAGING">
       <a class="page-link" (click)="setPage(currentPage - MIN_PAGING)"> 
         <span class="fa fa-arrow-circle-left"></span>
       </a>
     </li>
 
-    <li *ngFor="let page of pages" class="page-item" [ngClass]="{active:currentPage === page}" ><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+    <li *ngFor="let page of pages" class="page-item" [ngClass]="{active: currentPage === page}" ><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
 
-    <li class="page-item" [ngClass]="{disabled:currentPage === totalPages}">
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
       <a class="page-link" (click)="setPage(currentPage + MIN_PAGING)">
         <span class="fa fa-arrow-circle-right"></span>
       </a>

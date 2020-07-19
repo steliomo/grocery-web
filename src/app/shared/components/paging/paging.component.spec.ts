@@ -1,25 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {PagingComponent} from '../paging/paging.component';
 
-import { PagingComponent } from './paging.component';
+describe('Paging Component', () => {
 
-describe('PagingComponent', () => {
-  let component: PagingComponent;
-  let fixture: ComponentFixture<PagingComponent>;
+    let paging: PagingComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PagingComponent ]
+    beforeAll(() => {
+        paging = new PagingComponent;
+    });
+
+    it('Should return a number of pages if pageNumber is less tha MAX_PAGING ', ()=> {
+        let pageNumber = 5;
+
+        let pages = paging.getPages(pageNumber);
+
+        expect(pages.length).toBe(pageNumber);
     })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PagingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+})

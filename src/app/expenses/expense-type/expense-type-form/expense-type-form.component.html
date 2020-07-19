@@ -1,61 +1,82 @@
 <div class="card">
 
-  <div class="card-header bg-default ">
-      <div class="d-flex">
-          
-          <div class="mr-auto p-2 btn btn-default">
-              <span class="fa fa-money"></span><strong> Tipo de Despesa </strong>
-          </div>
+    <div class="card-header bg-default ">
+        <div class="d-flex">
 
-          <div class="p-1">
-              <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/expenses']"> Listar</button>
-          </div>
+            <div class="mr-auto p-2 btn btn-default">
+                <span class="fa fa-money"></span><strong> Tipo de Despesa </strong>
+            </div>
 
-      </div>
-  </div>
+            <div class="p-1">
+                <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/expenses']">
+                    Listar</button>
+            </div>
 
-  <form #form="ngForm" [formGroup]="expenseTypeForm" (submit)="saveExpenseType()">
-        
-    <div class="card-body">
+        </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="name" class="col-form-label col-md-2 text-right font-weight-bold">Nome:</label>
-            <div class="col-md-6 mb-3">    
-                <input formControlName="name" type="text" class="form-control" id="name" autocomplete="off">
-                <go-input-message message="*Campo obrigatório!" *ngIf="expenseTypeForm.get('name').errors?.required && (form.submitted || expenseTypeForm.get('name').touched)"></go-input-message>
-                <go-input-message message="* O nome deve ter no mínimo 3 caracteres" *ngIf="expenseTypeForm.get('name').errors?.minlength && (form.submitted || expenseTypeForm.get('name').touched)"></go-input-message>
+    <form #form="ngForm" [formGroup]="expenseTypeForm" (submit)="saveExpenseType()">
+
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="expenseTypeCategory"
+                    class="col-form-label col-md-2 text-right font-weight-bold">Categoria:</label>
+                <div class="col-md-4 mb-3">
+                    <select class="form-control" formControlName="expenseTypeCategory">
+                        <option *ngFor="let category of categories.values()" [value]="category">{{category}}</option>
+                    </select>
+                    <go-input-message message="*Campo obrigatório"
+                        *ngIf="expenseTypeForm.get('expenseTypeCategory').errors?.required && (form.submitted || expenseTypeForm.get('expenseTypeCategory').touched)"></go-input-message>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-form-label col-md-2 text-right font-weight-bold">Nome:</label>
+                <div class="col-md-6 mb-3">
+                    <input formControlName="name" type="text" class="form-control" id="name" autocomplete="off">
+                    <go-input-message message="*Campo obrigatório!"
+                        *ngIf="expenseTypeForm.get('name').errors?.required && (form.submitted || expenseTypeForm.get('name').touched)">
+                    </go-input-message>
+                    <go-input-message message="* O nome deve ter no mínimo 3 caracteres"
+                        *ngIf="expenseTypeForm.get('name').errors?.minlength && (form.submitted || expenseTypeForm.get('name').touched)">
+                    </go-input-message>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
+                <div class="col-md-6 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><span class="fa fa-comments"></span></div>
+                        </div>
+
+                        <textarea formControlName="description" class="form-control" id="description"
+                            autocomplete="off"></textarea>
+
+                    </div>
+                    <go-input-message message="*Campo obrigatório!"
+                        *ngIf="expenseTypeForm.get('description').errors?.required && (form.submitted || expenseTypeForm.get('description').touched)">
+                    </go-input-message>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer d-flex">
+            <div class="p-1" *ngIf="!expenseType">
+                <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+            </div>
+            <div class="p-1" *ngIf="expenseType">
+                <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateExpenseType()">
+                    Actualizar</button>
+            </div>
+            <div class="p-1">
+                <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
             </div>
         </div>
-    
-        <div class="form-group row">
-            <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
-            <div class="col-md-6 mb-3" > 
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><span class="fa fa-comments"></span></div>
-                </div>   
-                    
-                <textarea formControlName="description" class="form-control" id="description" autocomplete="off"></textarea>
-                    
-              </div>  
-              <go-input-message message="*Campo obrigatório!" *ngIf="expenseTypeForm.get('description').errors?.required && (form.submitted || expenseTypeForm.get('description').touched)"></go-input-message>
-             </div>
-        </div>
 
-    </div>
-
-    <div class="card-footer d-flex">
-        <div class="p-1" *ngIf="!expenseType">
-            <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
-        </div>
-        <div class="p-1" *ngIf="expenseType">
-            <button type="button" class="btn btn-primary fa fa-save font-weight-bold" (click)="updateExpenseType()"> Actualizar</button>
-        </div>
-        <div class="p-1">
-            <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
-        </div>
-    </div>
-
-  </form>
+    </form>
 
 </div>

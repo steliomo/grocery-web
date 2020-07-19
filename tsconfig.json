@@ -5,7 +5,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,6 +14,11 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    // "noImplicitAny": true,
+    // "noImplicitReturns": true,
+    // "noImplicitThis": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "strictNullChecks": true,
     "lib": [
       "es2018",
       "dom"

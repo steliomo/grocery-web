@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { LoadingType } from './loading-type';
 import { startWith } from 'rxjs/operators';
 
@@ -11,13 +11,11 @@ export class LoadingService {
     private loadingSubject: Subject<LoadingType>
 
     constructor(){
-        this.loadingSubject = new Subject();
+        this.loadingSubject = new BehaviorSubject(LoadingType.STOPPED);
     }
 
     getLoadingType(){
-        return this.loadingSubject
-                    .asObservable()
-                    .pipe(startWith(LoadingType.STOPPED));
+        return this.loadingSubject;
     }
 
     start(){

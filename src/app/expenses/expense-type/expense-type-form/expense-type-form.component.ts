@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ExpenseTypeDTO } from '../expense-type-dto';
 import { ExpenseTypeService } from '../expense-type.service';
+import { ExpenseTypeCategory } from '../expense-type-category';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expense-type-form',
@@ -14,11 +16,13 @@ export class ExpenseTypeFormComponent implements OnInit {
 
   expenseTypeForm: FormGroup;
   expenseType: ExpenseTypeDTO;
+  categories = ExpenseTypeCategory;
 
   constructor(private formBuilder: FormBuilder, private expenseTypeService: ExpenseTypeService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.expenseTypeForm = this.formBuilder.group({
+      expenseTypeCategory: ['', Validators.required],
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required]
     })
@@ -26,7 +30,11 @@ export class ExpenseTypeFormComponent implements OnInit {
     const expenseTypeUuid = this.route.snapshot.params.expenseTypeUuid;
 
     if (expenseTypeUuid) {
-      this.expenseTypeService.findExpenseTypeByUuid(expenseTypeUuid).subscribe(expenseTypeDTO => {
+      this.expenseTypeService.findExpenseTypeByUuid(expenseTypeUuid)
+        .pipe(tap(value => {
+          console.log(value);
+        }))
+        .subscribe(expenseTypeDTO => {
         this.expenseType = expenseTypeDTO;
         this.expenseTypeForm.patchValue(this.expenseType);
       });
@@ -49,6 +57,7 @@ export class ExpenseTypeFormComponent implements OnInit {
     if (this.expenseTypeForm.valid && !this.expenseTypeForm.pending) {
 
       const expenseType = this.expenseTypeForm.getRawValue() as ExpenseTypeDTO;
+      this.expenseType.expenseTypeCategory = expenseType.expenseTypeCategory;
       this.expenseType.name = expenseType.name;
       this.expenseType.description = expenseType.description;
 
