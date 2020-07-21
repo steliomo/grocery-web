@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { Dialog } from './dialog';
+import { Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
+import { Dialog } from './dialog';
 
 @Component({
   selector: 'go-confirmation-dialog',
@@ -12,7 +11,7 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   
   @Input() dialogId: string;
   
-  @ViewChild('closeModal') modal: ElementRef;
+  @ContentChild('closeModal', {static: false}) modal: ElementRef;
   
   @Output() dialogEvent = new EventEmitter();
 

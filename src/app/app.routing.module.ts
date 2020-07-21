@@ -24,12 +24,12 @@ const routes: Routes  = [
     
     {
         path: 'products',
-        loadChildren: './products/products.module#ProductsModule'
+        loadChildren: ()=> import('./products/products.module').then(m => m.ProductsModule)
     },
 
     {
         path: 'stocks',
-        loadChildren: './stocks/stocks.module#StocksModule'
+        loadChildren: ()=> import('./stocks/stocks.module').then(m => m.StocksModule)
     },
 
     {
@@ -76,7 +76,7 @@ const routes: Routes  = [
     
     {
         path: 'expenses',
-        loadChildren: './expenses/expenses.module#ExpensesModule'
+        loadChildren: () => import('./expenses/expenses.module').then(m => m.ExpensesModule)
     },
     
     {
