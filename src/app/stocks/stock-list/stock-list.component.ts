@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { query } from '@angular/core/src/render3';
-import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-
-import { StockService } from '../stock.service';
-import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
+import { debounceTime } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
-import { StocksDTO } from '../stocks-dto';
+import { ConfirmationDialogService } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.service';
 import { StockDTO } from '../stock-dto';
-import { ProductDescriptionDTO } from 'src/app/products/product-description/product-description-dto';
+import { StockService } from '../stock.service';
+import { StocksDTO } from '../stocks-dto';
+
 
 @Component({
   selector: 'app-stock-list',
