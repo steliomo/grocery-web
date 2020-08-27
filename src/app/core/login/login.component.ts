@@ -5,6 +5,7 @@ import { LoginService } from './login.service';
 import { TokenServie } from '../auth/token.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { Router } from '@angular/router';
+import { ErrorApi } from '../auth/error-api';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +36,14 @@ export class LoginComponent implements OnInit {
           this.tokenService.setFullName(userDto.fullName);
           this.tokenService.setGrocery(userDto.groceryUserDTO.groceryDTO);
           this.router.navigate(['home']);
+        }, error => {
+          if(error.message.includes("Invalid")){
+            this.alertService.danger("Credênciais Inválidas");
+            return;
+          }
+
+          this.alertService.danger(error.message);
+          console.log(error);
         });
     }
   }

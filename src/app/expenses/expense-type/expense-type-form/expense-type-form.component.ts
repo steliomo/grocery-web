@@ -27,19 +27,12 @@ export class ExpenseTypeFormComponent implements OnInit {
       description: ['', Validators.required]
     })
 
-    const expenseTypeUuid = this.route.snapshot.params.expenseTypeUuid;
+    const expenseTypeDTO = this.route.snapshot.data.expenseTypeDTO;
 
-    if (expenseTypeUuid) {
-      this.expenseTypeService.findExpenseTypeByUuid(expenseTypeUuid)
-        .pipe(tap(value => {
-          console.log(value);
-        }))
-        .subscribe(expenseTypeDTO => {
+    if (expenseTypeDTO) {
         this.expenseType = expenseTypeDTO;
         this.expenseTypeForm.patchValue(this.expenseType);
-      });
     }
-
   }
 
   saveExpenseType() {

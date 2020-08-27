@@ -5,6 +5,7 @@ import { ExpenseTypeFormComponent } from './expense-type/expense-type-form/expen
 import { ExpenseTypeListComponent } from './expense-type/expense-type-list/expense-type-list.component';
 import { ExpenseTypeResolver } from './expense-type/expense-type.resolver';
 import { ExpensesComponent } from './expenses.component';
+import { ExpenseTypeValueResolver } from './expense-type/expense-type-value.resolver';
 
 const routes: Routes = [
     {
@@ -27,7 +28,10 @@ const routes: Routes = [
 
             {
                 path: 'expenses-type-edit/:expenseTypeUuid',
-                component: ExpenseTypeFormComponent
+                component: ExpenseTypeFormComponent,
+                resolve: {
+                    expenseTypeDTO: ExpenseTypeValueResolver
+                }
             }
         ]
     }

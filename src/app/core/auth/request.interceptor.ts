@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { TokenServie } from './token.service';
 import { LoadingService } from 'src/app/shared/components/loading/loading.service';
+import { ErrorApi } from './error-api';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -33,6 +34,8 @@ export class RequestInterceptor implements HttpInterceptor {
 
             if (error instanceof HttpErrorResponse) {
                 switch (error.status) {
+                    case 400:
+                        return throwError(error.error as ErrorApi);
                     case 404:
                         this.router.navigate(['not-found']);
                         this.loadingService.stop();
