@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { TokenServie } from '../auth/token.service';
 import { User } from '../auth/user';
 import { LoginService } from './login.service';
-import { TokenServie } from '../auth/token.service';
-import { AlertService } from 'src/app/shared/components/alert/alert.service';
-import { Router } from '@angular/router';
-import { ErrorApi } from '../auth/error-api';
 
 @Component({
   selector: 'app-login',

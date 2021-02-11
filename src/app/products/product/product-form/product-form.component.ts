@@ -50,7 +50,7 @@ export class ProductFormComponent implements OnInit{
                 this.productService
                 .createteProduct(product)
                 .subscribe(productCreated => {
-                    this.alertService.success('O producto '+productCreated.name+' foi criado com sucesso.');
+                    this.alertService.success('O producto '+productCreated.name+' foi adicionado com sucesso.');
                     this.router.navigate(['/products/product-list']);
                 }, error => {
                     console.log(error);
