@@ -15,26 +15,31 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserRoleResolver } from './users/user-role.resolver';
 import { UsersComponent } from './users/users.component';
 
-const routes: Routes  = [
+const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
         canActivate: [AuthGuard]
     },
-    
+
     {
         path: 'products',
-        loadChildren: ()=> import('./products/products.module').then(m => m.ProductsModule)
+        loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
     },
 
     {
-        path: 'services',
+        path: 'service',
         loadChildren: () => import('./services/services.module').then(m => m.ServicesModule)
     },
 
     {
         path: 'stocks',
-        loadChildren: ()=> import('./stocks/stocks.module').then(m => m.StocksModule)
+        loadChildren: () => import('./stocks/stocks.module').then(m => m.StocksModule)
+    },
+
+    {
+        path: 'service-items',
+        loadChildren: () => import('./service-items/service-items.module').then(m => m.ServiceItemsModule)
     },
 
     {
@@ -78,12 +83,12 @@ const routes: Routes  = [
             }
         ]
     },
-    
+
     {
         path: 'expenses',
         loadChildren: () => import('./expenses/expenses.module').then(m => m.ExpensesModule)
     },
-    
+
     {
         path: '',
         component: HomeComponent,
@@ -95,7 +100,7 @@ const routes: Routes  = [
         component: LoginComponent,
         canActivate: [LoginGuard]
     },
-    
+
     {
         path: 'not-found',
         component: NotFoundComponent
@@ -108,13 +113,13 @@ const routes: Routes  = [
 ]
 
 @NgModule({
-  imports: [
-      RouterModule.forRoot(routes)
-  ],
+    imports: [
+        RouterModule.forRoot(routes)
+    ],
 
-  exports: [
-      RouterModule
-  ]
+    exports: [
+        RouterModule
+    ]
 
 })
-export class AppRoutingModule{}
+export class AppRoutingModule { }

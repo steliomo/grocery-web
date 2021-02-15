@@ -40,7 +40,7 @@ export class ServiceFormComponent implements OnInit {
       const serviceDTO = this.serviceForm.getRawValue() as ServiceDTO;
       this.serviceService.createService(serviceDTO).subscribe(createdService => {
         this.alertService.success('O serviço ' + createdService.name + ' foi adicionado com sucesso!');
-        this.router.navigate(['/services/service-list']);
+        this.router.navigate(['/service/service-list']);
       }, error => {
         this.alertService.danger('Erro ao adicionar o serviço!');
         console.log(error);
@@ -55,7 +55,7 @@ export class ServiceFormComponent implements OnInit {
 
       this.serviceService.updateService(this.service).subscribe(updatedService => {
         this.alertService.success('O Serviço ' + updatedService.name + ' foi actulizado com sucesso!');
-        this.router.navigate(['/services/service-list']);
+        this.router.navigate(['/service/service-list']);
       },
         error => {
           this.alertService.danger('Ocorreu um erro ao actulizar o serviço!');

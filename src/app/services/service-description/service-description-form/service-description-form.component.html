@@ -1,0 +1,58 @@
+<div class="card">
+
+    <div class="card-header bg-default ">
+        <div class="d-flex">
+
+            <div class="mr-auto p-2 btn btn-default">
+                <span class="fa fa-inbox"></span><strong> Detalhes do Serviço </strong>
+            </div>
+
+            <div class="p-1">
+                <button class="btn btn-success font-weight-bold fa fa-list" [routerLink]="['/service']"> Listar</button>
+            </div>
+        </div>
+    </div>
+
+    <form #form="ngForm" [formGroup]="serviceDescriptionForm" (submit)="saveServiceDescription()">
+
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="service" class="col-form-label col-md-2 text-right font-weight-bold">Serviço:</label>
+                <div class="col-md-6 mb-3">
+                    <go-search [items]="services" [selectedItem]="service" (searchEvent)="searchService($event)"
+                        (selectionEvent)="selectedService($event)"></go-search>
+                </div>
+                <div class="p-1">
+                    <a class="btn btn-success fa fa-plus-square" [routerLink]="['/service/service-create']"></a>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label col-md-2 text-right font-weight-bold">Descrição:</label>
+                <div class="col-md-6 mb-3">
+                    <input formControlName="description" type="text" class="form-control" id="description"
+                        autocomplete="off">
+                    <go-input-message message="*Campo obrigatório!"
+                        *ngIf="serviceDescriptionForm.get('description').errors?.required && (form.submitted || serviceDescriptionForm.get('description').touched)">
+                    </go-input-message>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer d-flex">
+            <div class="p-1" *ngIf="!serviceDescription">
+                <button type="submit" class="btn btn-primary fa fa-save font-weight-bold"> Adicionar</button>
+            </div>
+            <div class="p-1" *ngIf="serviceDescription">
+                <button type="button" class="btn btn-primary fa fa-save font-weight-bold"
+                    (click)="updateServiceDescription()"> Actualizar</button>
+            </div>
+            <div class="p-1">
+                <button type="reset" class="btn btn-danger fa fa-times-circle font-weight-bold"> Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+</div>

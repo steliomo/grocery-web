@@ -1,28 +1,35 @@
 <div class="container main-menu">
-    <ul class="nav nav-tabs menu-item">
-        <a [routerLink]="['/home']" routerLinkActive="menu-item-active" [routerLinkActiveOptions]="{exact: true}" class="col-sm-2"><li> <span class="fa fa-tachometer"></span> Home</li></a>
-        
-        <a class="col-sm-2" routerLinkActive="menu-item-active"> 
-          <li class="nav-item dropdown">
-            <span class="fa fa-inbox"></span> Produtos & Serviços
-            <div class="dropdown-menu">
-              <a class="dropdown-item" [routerLink]="['/products']"><span class="fa fa-shopping-basket"></span> Produtos</a>
-              <a class="dropdown-item" [routerLink]="['/services']"><span class="fa fa-gears"></span> Serviços</a>
-            </div>
-          </li>
-        </a>
-        
-        <a routerLinkActive="menu-item-active" class="col-sm-2">
-          <li class="nav-item dropdown">
-            <span class="fa fa-cart-arrow-down"></span> Items de Vendas
-            <div class="dropdown-menu">
-              <a class="dropdown-item" [routerLink]="['/stocks']"><span class="fa fa-shopping-basket"></span> Stocks</a>
-              <a class="dropdown-item" ><span class="fa fa-gears"></span> Serviços</a>
-            </div>
-          </li>
-        </a>
-        
-        <a [routerLink]="['/expenses']" routerLinkActive="menu-item-active" class="col-sm-2"><li><span class="fa fa-money"></span> Despesas</li></a>
-        <a [routerLink]="['/login']" routerLinkActive="menu-item-active" class="col-sm-2"><li><span class="fa fa-bar-chart"></span> Relatórios</li></a>
-      </ul>
+  <ul class="nav nav-tabs menu-item">
+    <a [routerLink]="['/home']" routerLinkActive="menu-item-active" [routerLinkActiveOptions]="{exact: true}"
+      class="col-sm-2">
+      <li> <span class="fa fa-tachometer"></span> Home</li>
+    </a>
+
+    <a class="col-sm-2" routerLinkActive="menu-item-active">
+      <li class="nav-item dropdown">
+        <span class="fa fa-inbox"></span> Produtos & Serviços
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/products']"><span class="fa fa-shopping-basket"></span> Produtos</a>
+          <a class="dropdown-item" [routerLink]="['/service']"><span class="fa fa-gears"></span> Serviços</a>
+        </div>
+      </li>
+    </a>
+
+    <a routerLinkActive="menu-item-active" class="col-sm-2">
+      <li class="nav-item dropdown">
+        <span class="fa fa-cart-arrow-down"></span> Items de Vendas
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/stocks']"><span class="fa fa-shopping-basket"></span> Stocks</a>
+          <a class="dropdown-item" [routerLink]="['/service-items']"><span class="fa fa-gears"></span> Serviços</a>
+        </div>
+      </li>
+    </a>
+
+    <a [routerLink]="['/expenses']" routerLinkActive="menu-item-active" class="col-sm-2">
+      <li><span class="fa fa-money"></span> Despesas</li>
+    </a>
+    <a [routerLink]="['/login']" routerLinkActive="menu-item-active" class="col-sm-2">
+      <li><span class="fa fa-bar-chart"></span> Relatórios</li>
+    </a>
+  </ul>
 </div>

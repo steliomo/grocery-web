@@ -26,4 +26,8 @@ export class ServiceService {
     updateService(serviceDTO: ServiceDTO) {
         return this.http.put<ServiceDTO>(environment.API_URL + '/services', serviceDTO);
     }
+
+    findServiceByName(serviceName: string) {
+        return this.http.get<ServicesDTO>(environment.API_URL + '/services/by-name/' + serviceName);
+    }
 }
