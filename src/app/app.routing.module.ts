@@ -8,6 +8,7 @@ import { GroceriesComponent } from './groceries/groceries.component';
 import { GroceryFormComponent } from './groceries/grocery-form/grocery-form.component';
 import { GroceryListComponent } from './groceries/grocery-list/grocery-list.component';
 import { GroceryResolver } from './groceries/grocery.resolver';
+import { UnitTypesResolver } from './groceries/unit-types.resolver';
 import { HomeComponent } from './home/home.component';
 import { GroceryUserResolver } from './users/grocery-user.resolver';
 import { UserFormComponent } from './users/user-form/user-form.component';
@@ -56,7 +57,10 @@ const routes: Routes = [
 
             {
                 path: 'grocery-create',
-                component: GroceryFormComponent
+                component: GroceryFormComponent,
+                resolve: {
+                    unitTypes: UnitTypesResolver
+                }
             }
         ]
     },

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroceryDTO } from 'src/app/groceries/grocery-dto';
+import { GroceryService } from 'src/app/groceries/grocery-service';
 import { ServiceDescriptionDTO } from 'src/app/services/service-description/service-description-dto';
+import { ServiceDescriptionService } from 'src/app/services/service-description/service-description.service';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { ServiceItemDTO } from '../service-item-dto';
 import { ServiceItemService } from '../service-item.service';
@@ -25,7 +27,9 @@ export class ServiceItemFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private serviceItemService: ServiceItemService,
-    private router: Router) { }
+    private router: Router,
+    private unitService: GroceryService,
+    private serviceDescriptionService: ServiceDescriptionService) { }
 
   ngOnInit() {
     this.units = this.route.snapshot.data.groceriesDTO.groceriesDTO;
@@ -102,4 +106,27 @@ export class ServiceItemFormComponent implements OnInit {
     }
   }
 
+  searchUnit(query: string) {
+    if (query) {
+      this.unitService.findUnitsByName(query).subscribe(
+        units => {
+          this.units = units.groceriesDTO;
+        });
+      return;
+    }
+
+    this.units = this.route.snapshot.data.groceriesDTO.groceriesDTO;
+  }
+
+  searchServiceDescription(query: string) {
+    if (query) {
+      this.serviceDescriptionService.fetchServiceDescriptionsByName(query).subscribe(
+        serviceDescriptions => {
+          this.serviceDescriptions = serviceDescriptions.serviceDescriptionsDTO;
+        })
+      return;
+    }
+
+    this.serviceDescriptions = this.route.snapshot.data.serviceDescriptionsDTO.serviceDescriptionsDTO;
+  }
 }

@@ -27,4 +27,9 @@ export class ServiceDescriptionService {
   updateServiceDescription(serviceDescription: ServiceDescriptionDTO) {
     return this.http.put<ServiceDescriptionDTO>(environment.API_URL + '/service-descriptions', serviceDescription);
   }
+
+  fetchServiceDescriptionsByName(serviceDescriptionName: string) {
+    const params = new HttpParams().set('serviceDescriptionName', serviceDescriptionName);
+    return this.http.get<ServiceDescriptionsDTO>(environment.API_URL + '/service-descriptions/by-name', { params });
+  }
 }
