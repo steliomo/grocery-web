@@ -19,7 +19,7 @@
         <form class="mb-3">
             <div class="form-group row">
                 <div class="col-md-6 mb-3">    
-                    <input type="service" class="form-control" type="search" id="service" placeholder="Pesquisar..." autofocus (keyup)="query.next($event.target.value)" autocomplete="off">
+                    <input type="service" class="form-control" type="search" id="service" placeholder="Pesquisar..." autofocus  autocomplete="off">
                 </div>
             </div>
         </form>
@@ -52,4 +52,4 @@
     </div>
   </div>
 
-<go-confirmation-dialog [dialogId]="'exampleModalCenter'" (dialogEvent)="removeservice($event)" ></go-confirmation-dialog>
+<go-confirmation-dialog [dialogId]="'exampleModalCenter'" (dialogEvent)="removeService($event)" ></go-confirmation-dialog>

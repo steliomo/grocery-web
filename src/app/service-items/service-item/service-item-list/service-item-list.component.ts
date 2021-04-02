@@ -29,4 +29,8 @@ export class ServiceItemListComponent implements OnInit {
         this.serviceItems = serviceItems.serviceItemsDTO;
       });
   }
+
+  removeStock(eventValue: any) {
+
+  }
 }

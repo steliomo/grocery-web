@@ -22,11 +22,14 @@ export class ServiceListComponent implements OnInit {
     this.totalItems = servicesDTO.totalItems;
   }
 
-  updateData(eventValue: any){
+  updateData(eventValue: any) {
     console.log(eventValue);
-    this.serviceService.findAllServices(eventValue.currentPage - 1, eventValue.pageSize).subscribe( servicesDTO => {
+    this.serviceService.findAllServices(eventValue.currentPage - 1, eventValue.pageSize).subscribe(servicesDTO => {
       this.services = servicesDTO.servicesDTO;
       this.totalItems = servicesDTO.totalItems;
     })
+  }
+
+  removeService(eventValue: any) {
   }
 }

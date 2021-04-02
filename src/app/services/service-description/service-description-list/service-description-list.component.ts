@@ -29,4 +29,8 @@ export class ServiceDescriptionListComponent implements OnInit {
         this.serviceDescriptions = serviceDescriptionsDTO.serviceDescriptionsDTO;
       });
   }
+
+  removeService(eventValue: any) {
+
+  }
 }
