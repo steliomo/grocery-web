@@ -2,8 +2,8 @@
   <nav class="navbar navbar-default">
      
      <div class="navbar-header">
-          <label class="navbar-brand brand">mO</label>
-          <label class="navbar-text">Mercearias Online</label>
+          <img src="assets/img/main_logo.png" alt="Negócios" class="img-fluid ">
+          <label class="navbar-text">Negócio na Mão  - (v2.0)</label>
       </div>
 
       <div *ngIf="getUsername()">
@@ -19,7 +19,7 @@
 
               <div  class="dropdown-item" [routerLink]="['/groceries']">
                 <img class="img-fluid w-25 mr-2" src="assets/img/shop.png" alt="Mercearias">
-                <label class="navbar-text">Mercearias</label>
+                <label class="navbar-text">Estabelecimentos</label>
               </div>
 
               <div  class="dropdown-item" [routerLink]="['/users']">

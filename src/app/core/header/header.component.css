@@ -7,14 +7,19 @@
 .brand {
     border-radius: 100%;
     background-color: #c62828;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 12px;
+    padding-right: 9px;
     text-align: center;
     font-weight: bold;
     font-size: 1.3em;
     font-family: "Shadows Into Light", cursive;
     text-shadow: 2px 2px #000;
     border: 2px solid #fff;
+}
+
+
+.navbar-text{
+    margin-left: 8px;
 }
 
 .navbar-brand{
@@ -24,6 +29,7 @@
 .dropdown-menu{
    margin-top: 25%;
    border-radius: unset;
+   width: 250px;
 }
 
 .dropdown-item:hover{
@@ -33,8 +39,15 @@
 
 .dropdown-item{
     cursor: pointer;
+    padding-right: 10px;
+    padding-left: 5px;
 }
 
 .btn {
     vertical-align: unset;
 }
+
+img {
+    border-radius: 50%;
+    width: 50px;
+  }

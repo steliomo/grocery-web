@@ -9,33 +9,31 @@ import { StocksDTO } from './stocks-dto';
 })
 export class StockService {
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient) { }
 
-    createStockProduct(stock: StockDTO){
-        return this.http.post<StockDTO>(environment.API_URL+'/stocks', stock);
+    createStockProduct(stock: StockDTO) {
+        return this.http.post<StockDTO>(environment.API_URL + '/stocks', stock);
     }
 
-    updateStock(stock: StockDTO){
-        return this.http.put<StockDTO>(environment.API_URL +'/stocks', stock);
+    updateStock(stock: StockDTO) {
+        return this.http.put<StockDTO>(environment.API_URL + '/stocks', stock);
     }
 
-    removeStock(stockUuid: string){
-        return this.http.delete<StockDTO>(environment.API_URL + '/stocks/'+ stockUuid);
+    removeStock(stockUuid: string) {
+        return this.http.delete<StockDTO>(environment.API_URL + '/stocks/' + stockUuid);
     }
 
-    fetchAllStocks(currentPage: number, maxResult: number){
-        const params: HttpParams =  new HttpParams().set('currentPage', currentPage.toString()).set('maxResult', maxResult.toString());
-        return this.http.get<StocksDTO>(environment.API_URL+'/stocks', {params});
+    fetchAllStocks(currentPage: number, maxResult: number) {
+        const params: HttpParams = new HttpParams().set('currentPage', currentPage.toString()).set('maxResult', maxResult.toString());
+        return this.http.get<StocksDTO>(environment.API_URL + '/stocks', { params });
     }
 
-    fetchStockByUuid(stockUuid: string){
-        return this.http.get<StockDTO>(environment.API_URL +'/stocks/'+ stockUuid);
+    fetchStockByUuid(stockUuid: string) {
+        return this.http.get<StockDTO>(environment.API_URL + '/stocks/' + stockUuid);
     }
 
-    fetchByProductDescription(description: string){
+    fetchByProductDescription(description: string) {
         const params: HttpParams = new HttpParams().set('description', description);
         return this.http.get<StockDTO[]>(environment.API_URL + '/stocks/by-description', { params });
     }
-
-
 }
