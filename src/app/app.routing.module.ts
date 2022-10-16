@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './core/auth/admin.guard';
 import { AuthGuard } from './core/auth/auth.guard';
 import { LoginGuard } from './core/auth/login.guard';
 import { LoginComponent } from './core/login/login.component';
+import { AccessDeniedComponent } from './errors/access-denied/access-denied.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { GroceriesComponent } from './groceries/groceries.component';
 import { GroceryFormComponent } from './groceries/grocery-form/grocery-form.component';
@@ -46,6 +48,7 @@ const routes: Routes = [
     {
         path: 'groceries',
         component: GroceriesComponent,
+        canActivate: [AdminGuard],
         children: [
             {
                 path: '',
@@ -68,6 +71,7 @@ const routes: Routes = [
     {
         path: 'users',
         component: UsersComponent,
+        canActivate: [AdminGuard],
         children: [
             {
                 path: '',
@@ -108,6 +112,11 @@ const routes: Routes = [
     {
         path: 'not-found',
         component: NotFoundComponent
+    },
+
+    {
+        path: 'access-denied',
+        component: AccessDeniedComponent
     },
 
     {

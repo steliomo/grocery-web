@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '../core/auth/admin.guard';
 import { AuthGuard } from '../core/auth/auth.guard';
 import { ProductDescriptionFormComponent } from './product-description/product-description-form/product-description-form.component';
 import { ProductDescriptionListComponent } from './product-description/product-description-list/product-description-list.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: ProductsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
 
     children: [
       {

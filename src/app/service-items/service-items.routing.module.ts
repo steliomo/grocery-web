@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AdminGuard } from "../core/auth/admin.guard";
 import { AuthGuard } from "../core/auth/auth.guard";
 import { GroceryResolver } from "../groceries/grocery.resolver";
 import { ProductDescriptionResolver } from "../products/product-description/product-description.resolver";
@@ -14,7 +15,7 @@ const routes: Routes = [
     {
         path: '',
         component: ServiceItemsComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
 
         children: [
             {

@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AdminGuard } from "../core/auth/admin.guard";
 import { AuthGuard } from "../core/auth/auth.guard";
 import { ServiceDescriptionFormComponent } from "./service-description/service-description-form/service-description-form.component";
 import { ServiceDescriptionListComponent } from "./service-description/service-description-list/service-description-list.component";
@@ -14,7 +15,7 @@ const routes: Routes = [{
 
     path: '',
     component: ServicesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
 
     children: [
         {

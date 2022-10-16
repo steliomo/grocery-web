@@ -3,7 +3,7 @@
      
      <div class="navbar-header">
           <img src="assets/img/main_logo.png" alt="Negócios" class="img-fluid ">
-          <label class="navbar-text">Negócio na Mão  - (v2.0)</label>
+          <label class="navbar-text">Negócio na Mão  - {{release()}}</label>
       </div>
 
       <div *ngIf="getUsername()">
@@ -17,12 +17,12 @@
             <button class="btn bbtn btn-outline-light fa fa-th" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
 
-              <div  class="dropdown-item" [routerLink]="['/groceries']">
+              <div  class="dropdown-item" [routerLink]="['/groceries']" *ngIf="hasRole()">
                 <img class="img-fluid w-25 mr-2" src="assets/img/shop.png" alt="Mercearias">
                 <label class="navbar-text">Estabelecimentos</label>
               </div>
 
-              <div  class="dropdown-item" [routerLink]="['/users']">
+              <div  class="dropdown-item" [routerLink]="['/users']" *ngIf="hasRole()">
                   <img class="img-fluid w-25 mr-2" src="assets/img/login.png" alt="Utilizadores">
                   <label class="navbar-text">Utilizadores</label>
               </div>

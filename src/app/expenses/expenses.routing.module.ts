@@ -6,12 +6,13 @@ import { ExpenseTypeListComponent } from './expense-type/expense-type-list/expen
 import { ExpenseTypeResolver } from './expense-type/expense-type.resolver';
 import { ExpensesComponent } from './expenses.component';
 import { ExpenseTypeValueResolver } from './expense-type/expense-type-value.resolver';
+import { AdminGuard } from '../core/auth/admin.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: ExpensesComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         children: [
             {
                 path: '',

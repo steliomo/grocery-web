@@ -14,13 +14,21 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  getUsername(){
+  getUsername() {
     return this.tokenService.getFullName();
   }
 
-  logout(){
+  logout() {
     this.tokenService.removeToken()
     this.router.navigate(['login']);
+  }
+
+  hasRole(): boolean {
+    return this.tokenService.hasAdminRole();
+  }
+
+  release(): string {
+    return "(v2.1)";
   }
 
 }

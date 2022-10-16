@@ -5,7 +5,7 @@
       <li> <span class="fa fa-tachometer"></span> Home</li>
     </a>
 
-    <a class="col-sm-2" routerLinkActive="menu-item-active">
+    <a class="col-sm-2" routerLinkActive="menu-item-active" *ngIf="hasRole()">
       <li class="nav-item dropdown">
         <span class="fa fa-inbox"></span> Produtos & Serviços
         <div class="dropdown-menu">
@@ -15,7 +15,7 @@
       </li>
     </a>
 
-    <a routerLinkActive="menu-item-active" class="col-sm-2">
+    <a routerLinkActive="menu-item-active" class="col-sm-2" *ngIf="hasRole()">
       <li class="nav-item dropdown">
         <span class="fa fa-cart-arrow-down"></span> Items de Vendas
         <div class="dropdown-menu">
@@ -25,7 +25,7 @@
       </li>
     </a>
 
-    <a [routerLink]="['/expenses']" routerLinkActive="menu-item-active" class="col-sm-2">
+    <a [routerLink]="['/expenses']" routerLinkActive="menu-item-active" class="col-sm-2" *ngIf="hasRole()">
       <li><span class="fa fa-money"></span> Despesas</li>
     </a>
     <a [routerLink]="['/login']" routerLinkActive="menu-item-active" class="col-sm-2">

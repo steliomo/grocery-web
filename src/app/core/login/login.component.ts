@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
           this.tokenService.setToken(this.tokenService.getBasickToken(user.username, user.password));
           this.tokenService.setFullName(userDto.fullName);
           this.tokenService.setGrocery(userDto.groceryUserDTO.groceryDTO);
+          this.tokenService.setUserRole(userDto.groceryUserDTO.userRole);
           this.router.navigate(['home']);
         }, error => {
           if(error.message.includes("Invalid")){

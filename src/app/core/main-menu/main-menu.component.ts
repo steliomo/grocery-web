@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenServie } from '../auth/token.service';
 
 @Component({
   selector: 'go-main-menu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tokenService: TokenServie) { }
 
   ngOnInit() {
+  }
+
+  hasRole() {
+    return this.tokenService.hasAdminRole();
   }
 
 }
