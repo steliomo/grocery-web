@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (!this.tokenService.hasAdminRole) {
+    if (!this.tokenService.hasAdminRole()) {
       this.router.navigate(['access-denied']);
       return false;
     }
