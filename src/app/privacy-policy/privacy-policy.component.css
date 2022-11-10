@@ -1,0 +1,15 @@
+h3 {
+    margin-top: 20px;
+}
+
+strong {
+    font-style: italic;
+}
+
+p {
+    text-align: justify;
+}
+
+.content {
+    margin-bottom: 50px;
+}

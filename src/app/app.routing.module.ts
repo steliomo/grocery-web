@@ -12,6 +12,7 @@ import { GroceryListComponent } from './groceries/grocery-list/grocery-list.comp
 import { GroceryResolver } from './groceries/grocery.resolver';
 import { UnitTypesResolver } from './groceries/unit-types.resolver';
 import { HomeComponent } from './home/home.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { GroceryUserResolver } from './users/grocery-user.resolver';
 import { UserFormComponent } from './users/user-form/user-form.component';
 import { UserListComponent } from './users/user-list/user-list.component';
@@ -119,6 +120,11 @@ const routes: Routes = [
         component: AccessDeniedComponent
     },
 
+    {
+        path: 'privacy',
+        component: PrivacyPolicyComponent
+    },
+    
     {
         path: '**',
         redirectTo: 'not-found'

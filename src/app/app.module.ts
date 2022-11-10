@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { ErrorsModule } from './errors/errors.module';
 import { GroceriesModule } from './groceries/groceries.module';
 import { HomeModule } from './home/home.module';
+import { PrivacyPolicyModule } from './privacy-policy/privacy-policy.module';
 import { UsersModule } from './users/users.module';
 
 
@@ -22,7 +23,8 @@ import { UsersModule } from './users/users.module';
     ErrorsModule,
     HomeModule,
     GroceriesModule,
-    UsersModule
+    UsersModule,
+    PrivacyPolicyModule
   ],
   providers: [],
   bootstrap: [AppComponent]
