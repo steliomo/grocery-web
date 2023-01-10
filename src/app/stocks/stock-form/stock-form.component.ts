@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TokenServie } from 'src/app/core/auth/token.service';
 import { GroceryDTO } from 'src/app/groceries/grocery-dto';
 import { GroceryService } from 'src/app/groceries/grocery-service';
 import { ProductDescriptionDTO } from 'src/app/products/product-description/product-description-dto';
@@ -47,6 +46,7 @@ export class StockFormComponent implements OnInit {
     this.stockForm = this.formBuilder.group({
       purchasePrice: ['', Validators.required],
       salePrice: ['', Validators.required],
+      rentPrice: ['', Validators.required],
       quantity: ['', Validators.required],
       minimumStock: ['', Validators.required]
     });
@@ -109,6 +109,7 @@ export class StockFormComponent implements OnInit {
       this.stock.productDescriptionDTO = this.productDescription;
       this.stock.purchasePrice = stock.purchasePrice;
       this.stock.salePrice = stock.salePrice;
+      this.stock.rentPrice = stock.rentPrice;
       this.stock.quantity = stock.quantity;
       this.stock.minimumStock = stock.minimumStock;
 

@@ -69,6 +69,24 @@
           </div>
 
           <div class="form-group row">
+            <label for="rentPrice" class="col-form-label col-md-2 text-right font-weight-bold">Preço de aluguer:</label>
+            <div class="col-md-4 mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-money"></span></div>
+                </div>   
+                    
+                <input formControlName="rentPrice" type="number" class="form-control" id="rentPrice" autocomplete="off">
+                    
+                <div class="input-group-append">
+                    <span class="input-group-text">MT</span>
+                </div>
+              </div> 
+              <go-input-message message="*Campo obrigatório!" *ngIf="stockForm.get('rentPrice').errors?.required && (form.submitted || stockForm.get('rentPrice').touched)"></go-input-message>
+             </div>
+        </div>
+
+          <div class="form-group row">
               <label for="quantity" class="col-form-label col-md-2 text-right font-weight-bold">Quantidade:</label>
               <div class="col-md-4 mb-3">
                 <div class="input-group">

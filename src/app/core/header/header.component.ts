@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   release(): string {
-    return "(v2.1)";
+    return "(v2.1.1)";
   }
 
 }
