@@ -10,4 +10,5 @@ export interface StockDTO extends GenericDTO {
     rentPrice: number;
     quantity:number;
     minimumStock: number;
+    unitPerM2: number;
 }

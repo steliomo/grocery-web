@@ -88,6 +88,7 @@ export class StockFormComponent implements OnInit {
       const stock = this.stockForm.getRawValue() as StockDTO;
       stock.groceryDTO = this.grocery;
       stock.productDescriptionDTO = this.productDescription;
+      stock.unitPerM2 = 0
 
       this.stockService
         .createStockProduct(stock)
