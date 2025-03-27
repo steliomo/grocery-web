@@ -54,7 +54,7 @@ export class UserFormComponent implements OnInit {
       }
       
       this.userDTO = this.userForm.getRawValue() as UserDTO;
-      this.userDTO.groceryUserDTO.groceryDTO = this.groceryDTO;
+      this.userDTO.unitUserDTO.unitDTO = this.groceryDTO;
 
       this.userService.createGroceryUser(this.userDTO)
                       .subscribe(userDTO => {

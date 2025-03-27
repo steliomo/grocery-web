@@ -86,7 +86,7 @@ export class StockFormComponent implements OnInit {
   saveStock() {
     if (this.stockForm.valid && !this.stockForm.pending) {
       const stock = this.stockForm.getRawValue() as StockDTO;
-      stock.groceryDTO = this.grocery;
+      stock.unitDTO = this.grocery;
       stock.productDescriptionDTO = this.productDescription;
       stock.unitPerM2 = 0
 
@@ -106,7 +106,7 @@ export class StockFormComponent implements OnInit {
     if (this.stockForm.valid && !this.stockForm.pending) {
       const stock = this.stockForm.getRawValue() as StockDTO;
 
-      this.stock.groceryDTO = this.grocery;
+      this.stock.unitDTO = this.grocery;
       this.stock.productDescriptionDTO = this.productDescription;
       this.stock.purchasePrice = stock.purchasePrice;
       this.stock.salePrice = stock.salePrice;

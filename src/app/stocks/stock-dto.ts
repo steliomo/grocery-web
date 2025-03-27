@@ -3,7 +3,7 @@ import { ProductDescriptionDTO } from '../products/product-description/product-d
 import { GenericDTO } from '../core/dto/generic-dto';
 
 export interface StockDTO extends GenericDTO {
-    groceryDTO: GroceryDTO;
+    unitDTO: GroceryDTO;
     productDescriptionDTO: ProductDescriptionDTO;
     purchasePrice: number;
     salePrice: number;

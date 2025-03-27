@@ -5,6 +5,6 @@ export interface UserDTO extends GenericDTO {
     fullName:string;
     username:string;
     password:string;
-    groceryUserDTO: GroceryUserDTO;
+    unitUserDTO: GroceryUserDTO;
     email: string;
 }

@@ -1,7 +1,7 @@
 import { GroceryDTO } from '../groceries/grocery-dto';
 
 export interface GroceryUserDTO {
-    groceryDTO: GroceryDTO;
+    unitDTO: GroceryDTO;
     userRole: string;
     expiryDate: Date;
 }
